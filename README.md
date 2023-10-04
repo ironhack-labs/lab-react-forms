@@ -81,7 +81,7 @@ You will do most of your work in the `App.jsx` file, which already has some star
 <br>
 
 <p align="center">
-  <img src="" alt="Example - Finished LAB" />
+  <img src="https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-react-forms/Iteration+0.png" alt="Iteration 0" width="600" />
 </p>
 
 
