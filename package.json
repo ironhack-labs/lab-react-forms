@@ -1,7 +1,7 @@
 {
-  "name": "project-management-client",
+  "name": "lab-react-forms",
   "private": true,
-  "version": "1.3.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,8 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.4.0",
-    "dom-to-image": "^2.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.2"
