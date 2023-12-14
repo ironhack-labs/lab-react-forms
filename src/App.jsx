@@ -8,7 +8,14 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
-
+  const [fullName, setFullName] = useState("");
+  const [image, setImage] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [program, setProgram] = useState("None");
+  const [graduationYear, setGraduationYear] = useState(2023); 
+  const [graduated, setGraduated] = useState(false);
+  
 
   return (
     <div className="App pt-20">
@@ -20,22 +27,34 @@ function App() {
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input name="fullName" 
+            type="text" 
+            onChange={setFullName} 
+             />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input name="image" 
+            type="url" 
+            onChange={setImage}
+            />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input name="phone" 
+            type="tel" 
+            onChange={setPhone}
+            />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input name="email" 
+            type="email" 
+            onChange={setEmail}
+            />
           </label>
         </div>
 
