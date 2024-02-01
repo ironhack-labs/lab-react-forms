@@ -14,7 +14,6 @@ function App() {
     <div className="App pt-20">
       <Navbar />
 
-      {/* FORM */}
       <form>
         <span>Add a Student</span>
         <div>
