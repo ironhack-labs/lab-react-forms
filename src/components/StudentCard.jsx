@@ -9,6 +9,7 @@ function StudentCard({
   graduated,
   className,
 }) {
+
   return (
       <div
         className={`StudentCard flex justify-between items-center p-3 mb-2 bg-white shadow-sm rounded border border-gray-200 hover:bg-gray-50 ${className}`}
