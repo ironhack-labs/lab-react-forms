@@ -8,41 +8,98 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [form, setForm] = useState({
+    fullName: "",
+    image: "",
+    phone: "",
+    email: "",
+    program: "",
+    graduationYear: 2023,
+    graduated: false,
+  });
 
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStudents([...students, form]);
+    setForm({
+      fullName: "",
+      image: "",
+      phone: "",
+      email: "",
+      program: "",
+      graduationYear: 2023,
+      graduated: false,
+    });
+  };
 
   return (
     <div className="App pt-20">
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input
+              onChange={(e) => handleChange(e)}
+              name="fullName"
+              type="text"
+              placeholder="Full Name"
+              value={form.fullName}
+            />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input
+              onChange={(e) => handleChange(e)}
+              name="image"
+              type="url"
+              placeholder="Profile Image"
+              value={form.image}
+            />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input
+              onChange={(e) => handleChange(e)}
+              name="phone"
+              type="tel"
+              placeholder="Phone"
+              value={form.phone}
+            />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input
+              onChange={(e) => handleChange(e)}
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={form.email}
+            />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select
+              onChange={(e) => handleChange(e)}
+              name="program"
+              value={form.program}
+            >
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -53,6 +110,7 @@ function App() {
           <label>
             Graduation Year
             <input
+              onChange={(e) => handleChange(e)}
               name="graduationYear"
               type="number"
               placeholder="Graduation Year"
@@ -60,24 +118,27 @@ function App() {
               maxLength={4}
               min={2023}
               max={2030}
+              value={form.graduationYear}
             />
           </label>
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input
+              onChange={(e) => handleChange(e)}
+              name="graduated"
+              type="checkbox"
+              checked={form.graduated}
+            />
           </label>
 
           <button type="submit">Add Student</button>
         </div>
-
       </form>
       {/* FORM END */}
 
-
       {/* TABLE/LIST HEADER */}
       <TableHeader />
-
 
       {/* STUDENT LIST */}
       {students &&
