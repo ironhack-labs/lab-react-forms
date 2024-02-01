@@ -8,41 +8,100 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [fullName, setFullname] = useState("");
+  const [profileImage, setProfileImage] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [program, setProgram] = useState("");
+  const [graduationYear, setGraduationYear] = useState(2023);
+  const [graduated, setGraduated] = useState(false);
 
+  const handleFullNameInput = (e) => setFullname(e.target.value);
+  const handleProfileImageInput = (e) => setProfileImage(e.target.value);
+  const handlePhoneInput = (e) => setPhone(e.target.value);
+  const handleEmailInput = (e) => setEmail(e.target.value);
+  const handleProgramInput = (e) => setProgram(e.target.value);
+  const handleGraduationYearInput = (e) => setGraduationYear(e.target.value);
+  const handleGraduatedInput = (e) => setGraduated(e.target.checked);
+
+  const handleSubmit = (e) => {
+    console.log(e.target.checked);
+    e.preventDefault();
+    console.log(e);
+    const newStudent = {
+      fullName,
+      profileImage,
+      phone,
+      email,
+      program,
+      graduationYear,
+      graduated,
+    };
+
+    setStudents((prevState) => [...prevState, newStudent]);
+
+    setFullname("");
+    setProfileImage("");
+    setPhone("");
+    setEmail("");
+    setProgram("");
+    setGraduationYear(2023);
+    setGraduated(false);
+  };
 
   return (
     <div className="App pt-20">
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input
+              name="fullName"
+              type="text"
+              placeholder="Full Name"
+              onChange={handleFullNameInput}
+            />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input
+              name="image"
+              type="url"
+              placeholder="Profile Image"
+              onChange={handleProfileImageInput}
+            />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input
+              name="phone"
+              type="tel"
+              placeholder="Phone"
+              onChange={handlePhoneInput}
+            />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              onChange={handleEmailInput}
+            />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select name="program" onChange={handleProgramInput}>
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -54,6 +113,7 @@ function App() {
             Graduation Year
             <input
               name="graduationYear"
+              onChange={handleGraduationYearInput}
               type="number"
               placeholder="Graduation Year"
               minLength={4}
@@ -65,19 +125,20 @@ function App() {
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input
+              name="graduated"
+              type="checkbox"
+              onChange={handleGraduatedInput}
+            />
           </label>
 
           <button type="submit">Add Student</button>
         </div>
-
       </form>
       {/* FORM END */}
 
-
       {/* TABLE/LIST HEADER */}
       <TableHeader />
-
 
       {/* STUDENT LIST */}
       {students &&
@@ -87,5 +148,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
