@@ -36,7 +36,7 @@ function App() {
     setEmail('')
     setProgram('')
     setGraduationYear('')
-    setGraduated('')
+    setGraduated(false)
   }
 
 
