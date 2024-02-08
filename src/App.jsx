@@ -25,13 +25,38 @@ function App() {
   const handleSelectInput = (e) => setSelect(e.target.value);
   const handleNumberInput = (e) => setNumber(e.target.value);
   
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newStudent = {
+      fullName: fullName,
+      email: email,
+      phone: phone,
+      program: select,
+      image: image,
+      graduationYear: number,
+      graduated: checkbox
+    }
+
+    const newList = [newStudent, ...students]
+
+    setStudents(newList)
+
+    setFullName("")
+    setImage("")
+    setPhone("")
+    setEmail("")
+    setCheckbox(false)
+    setSelect("")
+    setNumber(2023)
+  }
 
   return (
     <div className="App pt-20">
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <span>Add a Student</span>
         <div>
           <label>
