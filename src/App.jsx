@@ -9,40 +9,82 @@ import studentsData from "./assets/students.json";
 function App() {
   const [students, setStudents] = useState(studentsData);
 
+  const addNewStudent = NewStudent => {
+    const StudentCopy = [...students]
+    StudentCopy.unshift(NewStudent)
+
+    setStudents(StudentCopy)
+  }
+
+
+  const [fullName, setFullName] = useState("")
+  const [image, setImage] = useState("")
+  const [phone, setPhone] = useState("")
+  const [email, setEmail] = useState("")
+  const [program, setProgram] = useState("")
+  const [graduationYear, setGraduationYear] = useState(2023)
+  const [graduated, setGraduated] = useState(false)
+
+
+  const handleFullNameChange = event => setFullName(event.target.value)
+  const handleImageChange = event => setImage(event.target.value)
+  const handlePhoneChange = event => setPhone(event.target.value)
+  const handleEmailChange = event => setEmail(event.target.value)
+  const handleProgramChange = event => setProgram(event.target.value)
+  const handleGraduationYearChange = event => setGraduationYear(event.target.value)
+  const handleGraduatedChange = event => setGraduated(event.target.checked)
+
+
+  const handleFromSubmit = event => {
+    event.preventDefault()
+
+    const NewStudent = {
+      fullName: fullName,
+      image: image,
+      phone: phone,
+      email: email,
+      program: program,
+      graduationYear: graduationYear,
+      graduated: graduated
+    }
+    addNewStudent(NewStudent)
+
+  }
+
 
   return (
     <div className="App pt-20">
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={handleFromSubmit}>
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input name="fullName" placeholder="Full Name" value={fullName} type="text" onChange={handleFullNameChange} />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input name="image" type="url" placeholder="Profile Image" value={image} onChange={handleImageChange} />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input name="phone" type="tel" placeholder="Phone" value={phone} onChange={handlePhoneChange} />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input name="email" type="email" placeholder="Email" value={email} onChange={handleEmailChange} />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select name="program" value={program} onChange={handleProgramChange}>
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -56,6 +98,8 @@ function App() {
               name="graduationYear"
               type="number"
               placeholder="Graduation Year"
+              value={graduationYear}
+              onChange={handleGraduationYearChange}
               minLength={4}
               maxLength={4}
               min={2023}
@@ -65,7 +109,7 @@ function App() {
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input name="graduated" type="checkbox" value={graduated} onChange={handleGraduatedChange} />
           </label>
 
           <button type="submit">Add Student</button>
