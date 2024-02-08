@@ -35,7 +35,7 @@ function App() {
     setPhone('')
     setEmail('')
     setProgram('')
-    setGraduationYear('')
+    setGraduationYear(2023)
     setGraduated(false)
   }
 
