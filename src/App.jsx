@@ -8,6 +8,13 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [fullname, setFullName] = useState("");
+  const [image, setImage ] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [program, setProgram] = useState("");
+  const [graduation, setGraduation] = useState(2023);
+  const [graduated, setGraduated] = useState(false);
 
 
   return (
