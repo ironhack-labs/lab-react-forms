@@ -8,6 +8,38 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [fullName, setFullName] = useState ("");
+  const [image, setImage] = useState ("");
+  const [phone, setPhone] = useState ("");
+  const [email, setEmail] = useState ("");
+  const [program, setProgram] = useState ("");
+  const [graduationYear, setGraduationYear] = useState (2023);
+  const [graduated, setGraduated] = useState (false);
+
+
+  {/*Create new object to create new user */}
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const newObject= {
+      fullName, 
+      image, 
+      phone, 
+      email, 
+      program, 
+      graduationYear, 
+      graduated}
+      console.log (newObject)
+
+      setStudents([newObject, ...students])
+      setFullName("")
+      setImage("")
+      setPhone("")
+      setEmail("")
+      setProgram("")
+      setGraduationYear(2023) 
+      setGraduated(false)
+
+  }
 
 
   return (
@@ -15,34 +47,34 @@ function App() {
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input value={fullName} onChange={(event) => { setFullName(event.target.value) }} name="fullName" type="text" placeholder="Full Name" />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input value={image} onChange={(event) => { setImage(event.target.value) }} name="image" type="url" placeholder="Profile Image" />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input value={phone} onChange={(event) => { setPhone(event.target.value) }}name="phone" type="tel" placeholder="Phone" />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input value={email} onChange={(event) => { setEmail(event.target.value) }} name="email" type="email" placeholder="Email" />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select value={program} onChange={(event) => { setProgram(event.target.value) }} name="program">
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -52,7 +84,7 @@ function App() {
 
           <label>
             Graduation Year
-            <input
+            <input value={graduationYear} onChange={(event) => { setGraduationYear(event.target.value) }}
               name="graduationYear"
               type="number"
               placeholder="Graduation Year"
@@ -65,7 +97,7 @@ function App() {
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input checked={graduated} onChange={(event) => { setGraduated(event.target.value) }} name="graduated" type="checkbox" />
           </label>
 
           <button type="submit">Add Student</button>
