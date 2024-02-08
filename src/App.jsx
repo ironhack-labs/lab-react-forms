@@ -25,8 +25,8 @@ function App() {
       phone: phone,
       program: program,
       image: profileImage,
-      graduationYear: 2023,
-      graduated: true
+      graduationYear: graduationYear,
+      graduated: graduated
     }
 
     setStudents([...students, newStudent])
@@ -129,7 +129,7 @@ function App() {
             name="graduated" 
             type="checkbox" 
             value={graduated}
-            onChange={(e) => {setGraduated(e.target.value)}}
+            onChange={(e) => {setGraduated(e.target.checked)}}
             />
           </label>
 
