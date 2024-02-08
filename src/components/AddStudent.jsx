@@ -1,28 +1,43 @@
-import "./App.css";
 import { useState } from "react";
-import Navbar from "./components/Navbar";
-import TableHeader from "./components/TableHeader";
-import StudentCard from "./components/StudentCard";
-import studentsData from "./assets/students.json";
-import AddStudent from "./components/AddStudent";
 
-function App() {
-  const [students, setStudents] = useState(studentsData);
+function AddStudent({handleAddStudent}) {
 
-  const handleAddStudent = (newStudent) => {
-    setStudents([newStudent, ...students])
+    const [newStudent, setNewStudent] = useState({fullName:"", image:"", phone:"", email:"", program:"", graduationYear:"", graduated:""});
+ 
+    const handleValueChanges = e => {
+      setNewStudent({
+        ...newStudent, [e.target.name]: e.target.value,
+      })
+    }
+ 
+    {/*
+  const [fullName, setFullName] = useState("");
+  const [image, setImage] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [progam, setProgram] = useState("");
+  const [graduationYear, setGraduationYear] = useState("");
+  const [graduated, setGraduated] = useState("");
+  */}
 
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleAddStudent(newStudent)
 
+    setNewStudent ({
+      fullName: "", 
+      image:"", 
+      phone:"", 
+      email:"", 
+      program:"", 
+      graduationYear:"", 
+      graduated:""
+    });
 
+   
+  };
   return (
-    <div className="App pt-20">
-      <Navbar />
-
-      <AddStudent handleAddStudent={handleAddStudent} />
-
-      {/* FORM 
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
         <span>Add a Student</span>
         <div>
           <label>
@@ -31,8 +46,8 @@ function App() {
               name="fullName"
               type="text"
               placeholder="Full Name"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              value={newStudent.fullName}
+              onChange={handleValueChanges}
             />
           </label>
 
@@ -42,8 +57,8 @@ function App() {
               name="image"
               type="url"
               placeholder="Profile Image"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              value={newStudent.image}
+              onChange={handleValueChanges}
             />
           </label>
 
@@ -53,8 +68,8 @@ function App() {
               name="phone"
               type="tel"
               placeholder="Phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              value={newStudent.phone}
+              onChange={handleValueChanges}
             />
           </label>
 
@@ -64,8 +79,8 @@ function App() {
               name="email"
               type="email"
               placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={newStudent.email}
+              onChange={handleValueChanges}
             />
           </label>
         </div>
@@ -75,8 +90,8 @@ function App() {
             Program
             <select
               name="program"
-              value={progam}
-              onChange={(e) => setProgram(e.target.value)}
+              value={newStudent.progam}
+              onChange={handleValueChanges}
             >
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
@@ -95,8 +110,8 @@ function App() {
               maxLength={4}
               min={2023}
               max={2030}
-              value={graduationYear}
-              onChange={(e) => setGraduationYear(e.target.value)}
+              value={newStudent.graduationYear}
+              onChange={handleValueChanges}
             />
           </label>
 
@@ -105,26 +120,14 @@ function App() {
             <input
               name="graduated"
               type="checkbox"
-              checked={graduated}
-              onChange={(e) => setGraduated(e.target.checked)}
+              checked={newStudent.graduated}
+              onChange={handleValueChanges}
             />
           </label>
 
           <button type="submit">Add Student</button>
         </div>
-      </form>*/}
-      {/* FORM END */}
-
-      {/* TABLE/LIST HEADER */}
-      <TableHeader />
-
-      {/* STUDENT LIST */}
-      {students &&
-        students.map((student) => {
-          return <StudentCard key={student.email} {...student} />;
-        })}
-    </div>
+      </form>
   );
 }
-
-export default App;
+export default AddStudent;
