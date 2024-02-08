@@ -18,7 +18,7 @@ function App() {
 
   const handleSubmit = (event)=>{
     event.preventDefault();
-    const newStudent = { fullName, email, phone, program, image, graduationYear,graduated}
+    const newStudent = {fullName, email, phone, program, image, graduationYear,graduated}
 
     setStudents([newStudent, ...students]);
 
@@ -28,7 +28,7 @@ function App() {
     setEmail("");
     setProgram("");
     setGraduated(2023);
-    setGraduated("false");
+    setGraduated(false);
   }
 
   return (
@@ -88,7 +88,7 @@ function App() {
 
           <label>
             Graduated
-            <input value={graduated} name="graduated" type="checkbox" onChange={(event)=>{setGraduated(event.target.checked)}}/>
+            <input checked={graduated} name="graduated" type="checkbox" onChange={(event)=>{setGraduated(event.target.checked)}}/>
           </label>
 
           <button type="submit">Add Student</button>
