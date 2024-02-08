@@ -1,3 +1,4 @@
+
 import profileIcon from "../assets/profile-icon.png";
 
 function StudentCard({
