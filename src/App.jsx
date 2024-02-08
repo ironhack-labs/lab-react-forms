@@ -3,7 +3,6 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import TableHeader from "./components/TableHeader";
 import StudentCard from "./components/StudentCard";
-
 import studentsData from "./assets/students.json";
 
 function App() {
