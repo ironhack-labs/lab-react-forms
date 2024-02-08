@@ -106,7 +106,7 @@ function App() {
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" onChange={handleGraduated} value={graduated} />
+            <input name="graduated" type="checkbox" onChange={handleGraduated} checked={graduated} />
           </label>
 
           <button type="submit">Add Student</button>
