@@ -8,34 +8,51 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [fullName , setFullName] = useState(studentsData)
+  const [handleImageInput , setHandleImageInput] = useState(studentsData)
+  const [handlePhoneInput , setHandlePhoneInput] = useState(studentsData)
+  const [handleEmailInput , setHandleEmailInput] = useState(studentsData)
 
+  const handlefullNameInput = (e) => setTitle(e.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newStudent = { fullName, email, phone, program , image , graduationYear , graduated };
+    console.log("Submitted", newStudent);
+    props.addStudent(newStudent);
+
+    // Reset the state
+    setTitle("");
+    setDirector("");
+    setIMDBRating(5);
+    setHasOscars(true);
+  }
 
   return (
     <div className="App pt-20">
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input name="fullName" value={studentsData.fullName} type="text" placeholder="Full Name" onChange={handlefullNameInput} />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input name="image" value={studentsData.image} type="url" placeholder="Profile Image" onChange={handleImageInput} />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input name="phone" value={studentsData.phone} type="tel" placeholder="Phone" onChange={handlePhoneInput} />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input name="email" value={studentsData.email} type="email" placeholder="Email" onChange={handleEmailInput} />
           </label>
         </div>
 
