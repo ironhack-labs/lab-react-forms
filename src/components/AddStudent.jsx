@@ -32,6 +32,7 @@ export default function AddStudent({ onAddStudent }) {
       graduationYear: values.graduationYear,
       graduated: values.graduated,
     });
+    setValues(initialValues);
   };
 
   return (
