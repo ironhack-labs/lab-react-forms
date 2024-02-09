@@ -10,14 +10,34 @@ function App() {
   const [students, setStudents] = useState(studentsData);
   const [fullName, setFullName] = useState("");
   const [image, setImage] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState(0);
   const [email, setEmail] = useState("");
   const [program, setProgram] = useState("-- None --");
   const [graduationYear, setGraduationYear] = useState(2023);
   const [graduated, setGraduated] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newStudent = {
+      fullName: fullName,
+      email: email,
+      phone: phone,
+      program: program,
+      image: image,
+      graduationYear: graduationYear,
+      graduated: graduated,
+    };
+    console.log("Submitted", newStudent);
+    const newList = [newStudent, ...students];
+    setStudents(newList);
+
+    setFullName("");
+    setImage("");
+    setPhone("");
+    setEmail("");
+    setProgram("-- None --");
+    setGraduationYear(2023);
+    setGraduated(false);
   };
 
   return (
@@ -122,7 +142,7 @@ function App() {
               type="checkbox"
               checked={graduated}
               onChange={(e) => {
-                setGraduated(e.target.value);
+                setGraduated(e.target.checked);
               }}
             />
           </label>
