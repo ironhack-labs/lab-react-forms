@@ -10,7 +10,7 @@ function App() {
   const [students, setStudents] = useState(studentsData);
 
   const [fullName, setFullName] = useState(" ");
-  const [image, setimage] = useState(" ");
+  const [image, setImage] = useState(" ");
   const [phone, setPhone] = useState(" ");
   const [email, setEmail] = useState(" ");
   const [program, setProgram] = useState(" ");
@@ -58,7 +58,7 @@ function App() {
               type="url"
               placeholder="Profile Image"
               onChange={(element) => {
-                setimage(element.target.value);
+                setImage(element.target.value);
               }}
               value={image}
             />
