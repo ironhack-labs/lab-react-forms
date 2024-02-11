@@ -36,7 +36,7 @@ function handleSubmit(e) {
   setImage('');
   setPhone('');
   setEmail('');
-  setProgram('Bootcamp'); 
+  setProgram(' '); 
   setGraduationYear(2023);
   setGraduated(false);
 }
