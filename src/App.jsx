@@ -13,7 +13,7 @@ function App() {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [program, setProgram] = useState('');
-  const [graduationYear, setGraduationYear] = useState('');
+  const [graduationYear, setGraduationYear] = useState(2023);
   const [graduated, setGraduated] = useState(false);
 
 // const handleSubmit = (e)=> {
@@ -36,7 +36,7 @@ function handleSubmit(e) {
   setImage('');
   setPhone('');
   setEmail('');
-  setProgram('');
+  setProgram('Bootcamp'); 
   setGraduationYear(2023);
   setGraduated(false);
 }
