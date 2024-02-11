@@ -16,10 +16,30 @@ function App() {
   const [graduationYear, setGraduationYear] = useState('');
   const [graduated, setGraduated] = useState(false);
 
-const handleSubmit = (e)=> {
-  e.preventDefault();
-};
+// const handleSubmit = (e)=> {
+//   e.preventDefault();
+// };
 
+function handleSubmit(e) {
+  e.preventDefault();
+  setStudents(prevStudents => [...prevStudents, {
+    fullName,
+    image,
+    phone,
+    email,
+    program,
+    graduationYear,
+    graduated
+  }]);
+  
+  setFullName('');
+  setImage('');
+  setPhone('');
+  setEmail('');
+  setProgram('');
+  setGraduationYear(2023);
+  setGraduated(false);
+}
 
 
 return (
