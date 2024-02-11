@@ -8,15 +8,13 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState([]);
-
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [image, setImage] = useState('');
+  const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [gender, setGender] = useState(''); 
-  const [isGraduated, setIsGraduated] = useState(false); 
-  const [gpa, setGpa] = useState(0); 
+  const [program, setProgram] = useState('');
+  const [graduationYear, setGraduationYear] = useState('');
+  const [graduated, setGraduated] = useState(false);
 
 const handleSubmit = (e)=> {
   e.preventDefault();
@@ -33,85 +31,65 @@ return (
 
 <input
   type="text"
-  id="firstName"
-  name="firstName"
-  value={firstName}
-  onChange={(e) => setFirstName(e.target.value)}
+  name="fullName"
+  value={fullName}
+  onChange={(e) => setFullName(e.target.value)}
 
-  placeholder="First Name"
+  placeholder="Full Name"
 />
 <input
-  type="text"
-  id="lastName"
-  name="lastName"
-  value={lastName}
-
-
-  onChange={(e) => setLastName(e.target.value)}
-  placeholder="Last Name"
-/>
+  type="url"
+  name="image"
+  value={image}
+  onChange={(e) => setImage(e.target.value)}
+  placeholder="Image URL"
+        />
+<input
+  type="tel"
+  name="phone"
+  value={phone}
+  onChange={(e) => setPhone(e.target.value)}
+  placeholder="Phone"
+        />
 <input
   type="email"
-  id="email"
   name="email"
   value={email}
   onChange={(e) => setEmail(e.target.value)}
   placeholder="Email"
 />
-<input
-  type="tel"
-  id="phoneNumber"
-  name="phoneNumber"
-  value={phoneNumber}
-  onChange={(e) => setPhoneNumber(e.target.value)}
 
-  placeholder="Phone Number"
-
-/>
-<input
-  type="date"
-  id="dateOfBirth"
-  name="dateOfBirth"
-  value={dateOfBirth}
-  onChange={(e) => setDateOfBirth(e.target.value)}
-
-  placeholder="Date of Birth"
-/>
+{/* selecting program */}
 <select
-  name="gender"
-  id="gender"
-  value={gender}
-  onChange={(e) => setGender(e.target.value)}
->
-  <option value="">Select Gender</option>
-  <option value="male">Male</option>
+          name="program"
+          value={program}
+          onChange={(e) => setProgram(e.target.value)}
+        >
+          <option value="">Select Program</option>
+          <option value="Bootcamp">Bootcamp</option>
+          <option value="Workshop">Workshop</option>
+          <option value="Course">Course</option>
+        </select>
 
-  <option value="female">Female</option>
 
-  <option value="other">Other</option>
-</select>
-<input
-  type="checkbox"
-  name="isGraduated"
-  checked={isGraduated}
-  onChange={(e) => setIsGraduated(e.target.checked)}
-/>
-<label htmlFor="isGraduated">Is Graduated?</label>
-<input
-  type="number"
-
-  name="gpa"
-
-  value={gpa}
-  onChange={(e) => setGpa(parseFloat(e.target.value))}
-  placeholder="GPA"
-  min="0" 
-  max="4.0" 
-
-  step="0.01" 
-/>
-
+  <input
+          type="number"
+          name="graduationYear"
+          value={graduationYear}
+          onChange={(e) => setGraduationYear(e.target.value)}
+          placeholder="Graduation Year"
+          min="2023"
+          max="2030"
+        />
+   <input
+          type="checkbox"
+          name="graduated"
+          checked={graduated}
+          onChange={(e) => setGraduated(e.target.checked)}
+        />
+<label htmlFor="graduated">Graduated?</label>
 <button type="submit">Add Student</button>
+
 </form>
       {/* FORM END */}
 
@@ -123,7 +101,7 @@ return (
 
  {students &&
         students.map((student) => {
-          return <StudentCard key={student.email} {...student} />;
+          return <StudentCard key={student.email} {...student} />
         })}
     </div>
   );
