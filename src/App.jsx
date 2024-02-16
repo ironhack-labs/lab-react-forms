@@ -118,7 +118,7 @@ function App() {
         <div>
           <label>
             Program
-            <select name="program">
+            <select name="program" onChange={handleProgramChange}>
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
