@@ -8,10 +8,10 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
-  const [fullNameImput, setFullNameImput] = useState();
-  const [imageImput, setImageImput] = useState();
+  const [fullNameImput, setFullNameImput] = useState("");
+  const [imageImput, setImageImput] = useState("");
   const [phoneImput, setPhoneImput] = useState();
-  const [emailImput, setEmailImput] = useState();
+  const [emailImput, setEmailImput] = useState("");
   const [programSelect, setProgramSelect] = useState();
   const [graduationYearImput, setGraduationYearImput] = useState();
   const [graduatedImput, setGraduatedImput] = useState();
@@ -34,14 +34,14 @@ function App() {
   };
   const handleProgramChange = (event) => {
     let realImputValue = event.target.value;
-    setFullNameImput(realImputValue);
+    setProgramSelect(realImputValue);
   };
   const handleGraduationYearChange = (event) => {
     let realImputValue = event.target.value;
     setGraduationYearImput(realImputValue);
   };
   const handleGraduatedChange = (event) => {
-    let realImputValue = event.target.value;
+    let realImputValue = event.target.checked;
     setGraduatedImput(realImputValue);
   };
   const handleSubmit = (event) => {
