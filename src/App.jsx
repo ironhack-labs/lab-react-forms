@@ -14,7 +14,7 @@ function App() {
   const [emailImput, setEmailImput] = useState("");
   const [programSelect, setProgramSelect] = useState();
   const [graduationYearImput, setGraduationYearImput] = useState();
-  const [graduatedImput, setGraduatedImput] = useState();
+  const [graduatedImput, setGraduatedImput] = useState(false);
 
   const handleFullNameChange = (event) => {
     let realImputValue = event.target.value;
