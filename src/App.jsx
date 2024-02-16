@@ -8,52 +8,52 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
-  const [fullNameImput, setFullNameImput] = useState("");
-  const [imageImput, setImageImput] = useState("");
-  const [phoneImput, setPhoneImput] = useState();
-  const [emailImput, setEmailImput] = useState("");
-  const [programSelect, setProgramSelect] = useState();
-  const [graduationYearImput, setGraduationYearImput] = useState();
-  const [graduatedImput, setGraduatedImput] = useState(false);
+  const [fullNameInput, setFullNameInput] = useState("");
+  const [imageInput, setImageInput] = useState("");
+  const [phoneInput, setPhoneInput] = useState();
+  const [emailInput, setEmailInput] = useState("");
+  const [programSelect, setProgramSelect] = useState(0);
+  const [graduationYearInput, setGraduationYearInput] = useState();
+  const [graduatedInput, setGraduatedInput] = useState(false);
 
   const handleFullNameChange = (event) => {
-    let realImputValue = event.target.value;
-    setFullNameImput(realImputValue);
+    let realInputValue = event.target.value;
+    setFullNameInput(realInputValue);
   };
   const handleImageChange = (event) => {
-    let realImputValue = event.target.value;
-    setImageImput(realImputValue);
+    let realInputValue = event.target.value;
+    setImageInput(realInputValue);
   };
   const handlePhoneChange = (event) => {
-    let realImputValue = event.target.value;
-    setPhoneImput(realImputValue);
+    let realInputValue = event.target.value;
+    setPhoneInput(realInputValue);
   };
   const handleEmailChange = (event) => {
-    let realImputValue = event.target.value;
-    setEmailImput(realImputValue);
+    let realInputValue = event.target.value;
+    setEmailInput(realInputValue);
   };
   const handleProgramChange = (event) => {
-    let realImputValue = event.target.value;
-    setProgramSelect(realImputValue);
+    let realInputValue = event.target.value;
+    setProgramSelect(realInputValue);
   };
   const handleGraduationYearChange = (event) => {
-    let realImputValue = event.target.value;
-    setGraduationYearImput(realImputValue);
+    let realInputValue = event.target.value;
+    setGraduationYearInput(realInputValue);
   };
   const handleGraduatedChange = (event) => {
-    let realImputValue = event.target.checked;
-    setGraduatedImput(realImputValue);
+    let realInputValue = event.target.checked;
+    setGraduatedInput(realInputValue);
   };
   const handleSubmit = (event) => {
     event.preventDefault();
     const newStudent = {
-      fullName: fullNameImput,
-      image: imageImput,
-      phone: phoneImput,
-      email: emailImput,
+      fullName: fullNameInput,
+      image: imageInput,
+      phone: phoneInput,
+      email: emailInput,
       program: programSelect,
-      graduationYear: graduationYearImput,
-      graduated: graduatedImput,
+      graduationYear: graduationYearInput,
+      graduated: graduatedInput,
     };
     setStudents((event) => {
       let clone = JSON.parse(JSON.stringify(event));
@@ -76,7 +76,7 @@ function App() {
               name="fullName"
               type="text"
               placeholder="Full Name"
-              value={fullNameImput}
+              value={fullNameInput}
               onChange={handleFullNameChange}
             />
           </label>
@@ -87,7 +87,7 @@ function App() {
               name="image"
               type="url"
               placeholder="Profile Image"
-              value={imageImput}
+              value={imageInput}
               onChange={handleImageChange}
             />
           </label>
@@ -98,7 +98,7 @@ function App() {
               name="phone"
               type="tel"
               placeholder="Phone"
-              value={phoneImput}
+              value={phoneInput}
               onChange={handlePhoneChange}
             />
           </label>
@@ -109,7 +109,7 @@ function App() {
               name="email"
               type="email"
               placeholder="Email"
-              value={emailImput}
+              value={emailInput}
               onChange={handleEmailChange}
             />
           </label>
@@ -136,7 +136,7 @@ function App() {
               maxLength={4}
               min={2023}
               max={2030}
-              value={graduationYearImput}
+              value={graduationYearInput}
               onChange={handleGraduationYearChange}
             />
           </label>
@@ -146,7 +146,7 @@ function App() {
             <input
               name="graduated"
               type="checkbox"
-              checked={graduatedImput}
+              checked={graduatedInput}
               onChange={handleGraduatedChange}
             />
           </label>
