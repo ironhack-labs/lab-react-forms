@@ -46,8 +46,22 @@ function App() {
 
 
       return clone
+
+     
       
     })
+
+    useState(studentsData)
+    useState("")
+    useState("")
+    useState("")
+    useState("")
+    useState("")
+    useState(2023)
+    useState(false)
+
+
+
   }
   
 
@@ -86,7 +100,7 @@ function App() {
         <div>
           <label>
             Program
-            <select name="program">
+            <select name="program" onChange={handleProgram} value={program}>
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
