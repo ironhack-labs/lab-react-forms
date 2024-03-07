@@ -27,7 +27,6 @@ function App() {
     setGraduatedYear(2023)
     setImage("")
     setPhone(0)
-    
   }
 
 
