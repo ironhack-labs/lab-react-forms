@@ -9,6 +9,13 @@ import studentsData from "./assets/students.json";
 function App() {
   const [students, setStudents] = useState(studentsData);
 
+  const [fullNameState, setFullNameState] = useState("");
+  const [imgState, setImgState] = useState("");
+  const [phoneState, setPhoneState] = useState("");
+  const [emailState, setEmailState] = useState("");
+  const [programState, setProgramState] = useState("");
+  const [graduattionYearState, setgraduattionYearState] = useState(2023);
+  const [graduatedState, setGraduatedState] = useState(false);
 
   return (
     <div className="App pt-20">
@@ -70,14 +77,11 @@ function App() {
 
           <button type="submit">Add Student</button>
         </div>
-
       </form>
       {/* FORM END */}
 
-
       {/* TABLE/LIST HEADER */}
       <TableHeader />
-
 
       {/* STUDENT LIST */}
       {students &&
