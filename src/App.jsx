@@ -9,7 +9,21 @@ import studentsData from "./assets/students.json";
 function App() {
   const [students, setStudents] = useState(studentsData);
 
-
+  const handleAddStudent  = ({fullName, email, phone, program, image, graduationYear, graduated}) => {
+    setStudents([
+      ...students,
+      {
+        id:students.at(-1).id+1,
+        fullName: fullName,
+        email: email,
+        phone: phone,
+        program: program,
+        image: image,
+        graduationYear: graduationYear,
+        graduated: graduated,
+      },
+    ]);
+  };
   return (
     <div className="App pt-20">
       <Navbar />
