@@ -1,6 +1,7 @@
 import profileIcon from "../assets/profile-icon.png";
 
 function StudentCard({
+  // _id,
   fullName,
   email,
   phone,
