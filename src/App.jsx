@@ -9,40 +9,107 @@ import studentsData from "./assets/students.json";
 function App() {
   const [students, setStudents] = useState(studentsData);
 
+  const [fullName, setFullName] = useState("");
+  const [image, setImage] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [program, setProgram] = useState("");
+  const [graduationYear, setGraduationYear] = useState(2023);
+  const [graduated, setGraduated] = useState(false);
+
+  const handleFullNameInput = (e) => setFullName(e.target.value);
+  const handleImageInput = (e) => setImage(e.target.value);
+  const handlePhoneInput = (e) => setPhone(e.target.value);
+  const handleEmailInput = (e) => setEmail(e.target.value);
+  const handleProgramInput = (e) => setProgram(e.target.value);
+  const handleGraduationYearInput = (e) => setGraduationYear(e.target.value);
+  const handleGraduatedInput = (e) => setGraduated(e.target.checked);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    const newStudent = {
+      fullName,
+      image,
+      phone,
+      email,
+      program,
+      graduationYear,
+      graduated,
+    };
+
+    setStudents([...students, newStudent]);
+
+    setFullName("");
+    setImage("");
+    setPhone("");
+    setEmail("");
+    setProgram("");
+    setGraduationYear(2023);
+    setGraduated(false);
+  };
 
   return (
     <div className="App pt-20">
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input
+              name="fullName"
+              type="text"
+              placeholder="Full Name"
+              value={fullName}
+              onChange={handleFullNameInput}
+            />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input
+              name="image"
+              type="url"
+              placeholder="Profile Image"
+              value={image}
+              onChange={handleImageInput}
+            />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input
+              name="phone"
+              type="tel"
+              placeholder="Phone"
+              value={phone}
+              onChange={handlePhoneInput}
+            />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={handleEmailInput}
+            />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select
+              name="program"
+              value={program}
+              onChange={handleProgramInput}
+            >
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -56,6 +123,8 @@ function App() {
               name="graduationYear"
               type="number"
               placeholder="Graduation Year"
+              value={graduationYear}
+              onChange={handleGraduationYearInput}
               minLength={4}
               maxLength={4}
               min={2023}
@@ -65,19 +134,21 @@ function App() {
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input
+              name="graduated"
+              type="checkbox"
+              checked={graduated}
+              onChange={handleGraduatedInput}
+            />
           </label>
 
           <button type="submit">Add Student</button>
         </div>
-
       </form>
       {/* FORM END */}
 
-
       {/* TABLE/LIST HEADER */}
       <TableHeader />
-
 
       {/* STUDENT LIST */}
       {students &&
