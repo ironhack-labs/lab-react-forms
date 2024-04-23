@@ -8,41 +8,116 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [fullName, setFullName] = useState("");
+  const [image, setImage] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [program, setProgram] = useState("");
+  const [graduationYear, setGraduationYear] = useState(2023);
+  const [graduated, setGraduated] = useState(false);
 
+  const handleFullNameChange = (e) => setFullName(e.target.value);
+  const handleImageChange = (e) => setImage(e.target.value);
+  const handlePhoneChange = (e) => setPhone(e.target.value);
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handleProgramChange = (e) => setProgram(e.target.value);
+  const handleGraduationYearChange = (e) => setGraduationYear(e.target.value);
+  const handleGraduatedChange = (e) => setGraduated(e.target.checked);
+
+  function handleAddStudent(student) {
+    setStudents((prevStudents) => [student, ...prevStudents]);
+  }
+
+  function handleSubmit(e) {
+    // Prevent form from refreshing page
+    e.preventDefault();
+
+    // Create new student object
+    const newStudent = {
+      students,
+      fullName,
+      image,
+      phone,
+      email,
+      program,
+      graduationYear,
+      graduated,
+    };
+
+    // Add new student to students array
+    handleAddStudent(newStudent);
+
+    // Reset form fields
+    setFullName("");
+    setImage("");
+    setPhone("");
+    setEmail("");
+    setProgram("");
+    setGraduationYear(2023);
+    setGraduated(false);
+  }
 
   return (
     <div className="App pt-20">
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input
+              name="fullName"
+              type="text"
+              value={fullName}
+              placeholder="Full Name"
+              onChange={handleFullNameChange}
+            />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input
+              name="image"
+              type="url"
+              value={image}
+              placeholder="Profile Image"
+              onChange={handleImageChange}
+            />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input
+              name="phone"
+              type="tel"
+              value={phone}
+              placeholder="Phone"
+              onChange={handlePhoneChange}
+            />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input
+              name="email"
+              type="email"
+              value={email}
+              placeholder="Email"
+              onChange={handleEmailChange}
+            />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select
+              name="program"
+              value={program}
+              onChange={handleProgramChange}
+            >
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -55,6 +130,8 @@ function App() {
             <input
               name="graduationYear"
               type="number"
+              value={graduationYear}
+              onChange={handleGraduationYearChange}
               placeholder="Graduation Year"
               minLength={4}
               maxLength={4}
@@ -65,21 +142,21 @@ function App() {
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input
+              name="graduated"
+              type="checkbox"
+              onChange={handleGraduatedChange}
+              checked={graduated}
+            />
           </label>
 
           <button type="submit">Add Student</button>
         </div>
-
       </form>
-      {/* FORM END */}
+      {/* END FORM */}
 
-
-      {/* TABLE/LIST HEADER */}
       <TableHeader />
 
-
-      {/* STUDENT LIST */}
       {students &&
         students.map((student) => {
           return <StudentCard key={student.email} {...student} />;
