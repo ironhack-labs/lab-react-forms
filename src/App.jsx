@@ -5,9 +5,55 @@ import TableHeader from "./components/TableHeader";
 import StudentCard from "./components/StudentCard";
 
 import studentsData from "./assets/students.json";
+import { useAsyncError } from "react-router-dom";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [fullName, setFullName] = useState('');
+  const [image, setImage] = useState('');
+  const [tel, setTel] = useState('');
+  const [email, setEmail] = useState('');
+  const [program, setProgram] = useState('');
+  const [graduationYear, setGraduationYear] = useState(2023);
+  const [graduated, setGraduated] = useState(false);
+
+  const handleFullNameInput = (e) => setFullName(e.target.value);
+  const handleImageInput = (e) => setImage(e.target.value);
+  const handleTelInput = (e) => setTel(e.target.input);
+  const handleEmailInput = (e) => setEmail(e.target.value);
+  const handleProgramInput = (e) => setProgram(e.target.value);
+  const handleGraduationYearInput = (e) => setGraduationYear(e.target.value);
+  const handleGraduatedInput = (e) => setGraduated(e.target.checked);
+
+  const addNewStudent = (newStudent) => {
+    const updatedStudents = [...students, newStudent];
+
+    setStudents(updatedStudents);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newStudent = {
+      fullName: fullName,
+      email: email,
+      phone: tel,
+      program: program,
+      image: image,
+      graduationYear: graduationYear,
+      graduated: graduated,
+    }
+    console.log(newStudent)
+    addNewStudent(newStudent);
+
+    //reseting state
+    setFullName('');
+    setImage('');
+    setTel('');
+    setEmail('');
+    setProgram('');
+    setGraduationYear(2023);
+    setGraduated(false);
+  }
 
 
   return (
@@ -15,34 +61,34 @@ function App() {
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input name="fullName" type="text" placeholder="Full Name" onChange={handleFullNameInput} />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input name="image" type="url" placeholder="Profile Image" onChange={handleImageInput} />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input name="phone" type="tel" placeholder="Phone" onChange={handleTelInput} />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input name="email" type="email" placeholder="Email" onChange={handleEmailInput} />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select name="program" onChange={handleProgramInput}>
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -60,12 +106,13 @@ function App() {
               maxLength={4}
               min={2023}
               max={2030}
+              onChange={handleGraduationYearInput}
             />
           </label>
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input name="graduated" type="checkbox" checked={graduated} onChange={handleGraduatedInput} />
           </label>
 
           <button type="submit">Add Student</button>
