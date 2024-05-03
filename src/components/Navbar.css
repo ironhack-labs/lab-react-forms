@@ -1,0 +1,15 @@
+nav .highlight {
+    background-color: #646cff;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+ }
+
+ nav .highlight::before {
+    content: unset;
+ }
+
+ nav .highlight:hover {
+    background-color: #535bf2;
+    color: #fff;
+ }
