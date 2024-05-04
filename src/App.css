@@ -83,9 +83,15 @@
 }
 
 .StudentCard span {
-word-break: break-all; /* Non standard for webkit */ 
-word-break: break-word; 
--webkit-hyphens:none; 
--moz-hyphens: none; 
-hyphens: noine;
+  word-break: break-all;
+  /* Non standard for webkit */
+  word-break: break-word;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  hyphens: noine;
+}
+
+.StudentsFilter input {
+  width: 300px;
+  margin-bottom: 25px;
 }
