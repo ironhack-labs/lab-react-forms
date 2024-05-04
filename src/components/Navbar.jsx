@@ -13,7 +13,7 @@ function Navbar() {
         </div>
 
         <div className="flex justify-center w-1/2">
-        <span className="text-xl">
+          <span className="text-xl">
             Cohort Tools
           </span>
         </div>
