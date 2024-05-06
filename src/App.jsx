@@ -8,8 +8,26 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [ fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [program, setProgram] = useState();
 
+  function studentsToDisplay(){
 
+  }
+
+ const handleSubmit = (e) => {
+  e.preventDefault();
+  const newStudent = {
+  fullName : fullName,
+  phone : phone,
+  email : email ,
+  program : program,
+
+ }
+ setStudents({...students , newStudent})
+}
   return (
     <div className="App pt-20">
       <Navbar />
@@ -20,7 +38,15 @@ function App() {
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input
+              name="fullName"
+              type="text"
+              placeholder="Full Name"
+              value={fullName}
+              onChange={(e) => {
+                setFullName(e.target.value);
+              }}
+            />
           </label>
 
           <label>
@@ -30,12 +56,22 @@ function App() {
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input name="phone" type="tel" placeholder="Phone"
+                    value={phone}
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                    }}
+                    />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input name="email" type="email" placeholder="Email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+            />
           </label>
         </div>
 
@@ -44,7 +80,7 @@ function App() {
             Program
             <select name="program">
               <option value="">-- None --</option>
-              <option value="Web Dev">Web Dev</option>
+              <option value={program}>Web Dev</option>
               <option value="UXUI">UXUI</option>
               <option value="Data">Data</option>
             </select>
@@ -68,16 +104,13 @@ function App() {
             <input name="graduated" type="checkbox" />
           </label>
 
-          <button type="submit">Add Student</button>
+          <button onClick={handleSubmit} type="submit">Add Student</button>
         </div>
-
       </form>
       {/* FORM END */}
 
-
       {/* TABLE/LIST HEADER */}
       <TableHeader />
-
 
       {/* STUDENT LIST */}
       {students &&
