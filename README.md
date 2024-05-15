@@ -64,10 +64,11 @@ npm run dev
 
 - Create a Pull Request and submit your assignment.
 
-<br>
+  
 
 ## Instructions
 
+----
 
 ### Iteration 0 | Starter Code
 
@@ -80,7 +81,7 @@ You will do most of your work in the `App.jsx` file, which already has some star
 <br>
 
 <p align="center">
-  <img src="https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-react-forms/Iteration+0.png" alt="Iteration 0" width="600" />
+  <img src="" alt="Example - Finished LAB" />
 </p>
 
 
@@ -139,7 +140,7 @@ Default value of the state variable should be set according to the type of the i
 - `text`, `url`, `tel`, `email`, and `password` inputs should have an empty string **`""`** as the default value
 - `checkbox` inputs should have **`false`** as the default value
 - `select` inputs should have the **string value of the first option** set as the default value
-- `number` inputs should always have a default value set, such as **`0` or any other number** depending on the use case. <br> 
+- `number` inputs should always have a default value set, such as **`0` or any other number** depending on the use case. 
 In case the input has validation attributes (`min`, `max`), the default value can be set to the `min` value.
 
 
@@ -148,7 +149,7 @@ In case the input has validation attributes (`min`, `max`), the default value ca
 
 
 <p align="center">
-  <img src="https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-react-forms/Iteration+1.png" alt="Iteration 1" width="500" />
+  <img src="https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-react-forms/Iteration+1.png" alt="Iteration 1" width="600" />
 
 
 
@@ -172,7 +173,7 @@ In addition to this, remember to **add the `onChange` event to each input** and 
 <br>
 
 <p align="center">
-  <img src="https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-react-forms/Iteration+2.png" alt="Iteration 2" width="700" />
+  <img src="https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-react-forms/Iteration+2.png" alt="Iteration 2" />
 
 
 </p>
@@ -187,7 +188,7 @@ In addition to this, remember to **add the `onChange` event to each input** and 
 
 <br>
 
-<details>
+
 
   <summary><b>Hint</b></summary>
 
@@ -199,7 +200,7 @@ For the inputs with **`type="checkox"`** you should **use the attribute `checked
 
   <br>
 
-
+In order to link the `onChange` event to the state variable and update it, you will need to create a function that is responsible for handling the input changes and updating the state variable. For example, the `onChange` event of the `fullName` input should be linked to the `handleFullName` function that updates the `fullName` state variable. The same logic should be applied to all other inputs.
 
 
   <br>
@@ -237,7 +238,7 @@ Once the button <kbd>Add Student</kbd> is clicked and the new student object is 
 
 If you implement the logic correctly, you should see the new student added to the list of students.
 
-<br>
+
 
 <details>
   <summary><b>See Expected Result</b></summary>
