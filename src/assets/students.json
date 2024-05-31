@@ -1,6 +1,7 @@
 [
 
   {
+    "id": 1,
     "fullName": "Christine Clayton",
     "email": "chris.c@example.com",
     "phone": "567-890-1234",
@@ -10,6 +11,7 @@
     "graduated": true
   },
   {
+    "id": 2,
     "fullName": "Grace Green",
     "email": "grace.g@example.com",
     "phone": "901-234-5678",
@@ -19,6 +21,7 @@
     "graduated": false
   },
   {
+    "id": 3,
     "fullName": "Jack Johnson",
     "email": "jack.j@example.com",
     "phone": "234-567-8901",
