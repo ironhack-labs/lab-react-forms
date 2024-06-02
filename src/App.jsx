@@ -6,8 +6,16 @@ import StudentCard from "./components/StudentCard";
 
 import studentsData from "./assets/students.json";
 
+
+
+
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [text, setText] = useState("")
+  const [url, setUrl] = useState("")
+  const [tel, setTel] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
 
   return (
