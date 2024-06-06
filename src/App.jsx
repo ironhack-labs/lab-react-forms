@@ -5,87 +5,40 @@ import TableHeader from "./components/TableHeader";
 import StudentCard from "./components/StudentCard";
 
 import studentsData from "./assets/students.json";
-
+import AddStudent from "./components/AddStudent";
+/*
+  - https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-cohort-tools-routing/profile-1.png
+  - https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-cohort-tools-routing/profile-2.png
+  - https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-cohort-tools-routing/profile-4.png
+  - https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-cohort-tools-routing/profile-6.png
+*/
 function App() {
-  const [students, setStudents] = useState(studentsData);
+    const [students, setStudents] = useState(studentsData);
 
+    return (
+        <div className="App pt-20">
+            <Navbar />
 
-  return (
-    <div className="App pt-20">
-      <Navbar />
-
-      {/* FORM */}
-      <form>
-        <span>Add a Student</span>
-        <div>
-          <label>
-            Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
-          </label>
-
-          <label>
-            Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
-          </label>
-
-          <label>
-            Phone
-            <input name="phone" type="tel" placeholder="Phone" />
-          </label>
-
-          <label>
-            Email
-            <input name="email" type="email" placeholder="Email" />
-          </label>
-        </div>
-
-        <div>
-          <label>
-            Program
-            <select name="program">
-              <option value="">-- None --</option>
-              <option value="Web Dev">Web Dev</option>
-              <option value="UXUI">UXUI</option>
-              <option value="Data">Data</option>
-            </select>
-          </label>
-
-          <label>
-            Graduation Year
-            <input
-              name="graduationYear"
-              type="number"
-              placeholder="Graduation Year"
-              minLength={4}
-              maxLength={4}
-              min={2023}
-              max={2030}
+            <AddStudent
+                students={students}
+                setStudents={setStudents}
             />
-          </label>
 
-          <label>
-            Graduated
-            <input name="graduated" type="checkbox" />
-          </label>
+            {/* TABLE/LIST HEADER */}
+            <TableHeader />
 
-          <button type="submit">Add Student</button>
+            {/* STUDENT LIST */}
+            {students &&
+                students.map((student) => {
+                    return (
+                        <StudentCard
+                            key={student.email}
+                            {...student}
+                        />
+                    );
+                })}
         </div>
-
-      </form>
-      {/* FORM END */}
-
-
-      {/* TABLE/LIST HEADER */}
-      <TableHeader />
-
-
-      {/* STUDENT LIST */}
-      {students &&
-        students.map((student) => {
-          return <StudentCard key={student.email} {...student} />;
-        })}
-    </div>
-  );
+    );
 }
 
 export default App;
