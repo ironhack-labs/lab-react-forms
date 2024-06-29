@@ -3,46 +3,83 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import TableHeader from "./components/TableHeader";
 import StudentCard from "./components/StudentCard";
-
 import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
 
+  const [text, setText] = useState("");
+  const [url, setUrl]= useState("");
+  const [tel, setTel]= useState("");
+  const [email, setEmail]= useState("");
+  const [checkbox, setCheckBox] = useState(false);
+  const [program, setProgram] = useState("");
+  const [graduationYear, setGraduationYear] = useState(2023)
 
+const handleTextInput = (event) => setText(event.target.value);
+const handleUrlInput = (event) => setUrl(event.target.value);
+const handleEmailInput = (event) => setEmail(event.target.value);
+const handleTelInput = (event) => setTel(event.target.value);
+const handleCheckBox = (event) => setCheckBox(event.target.checked);
+const handleProgramInput = (event) => setProgram(event.target.value);
+const handleGraduationYearInput = (event) => setGraduationYear(event.target.value);
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+
+  const newStudent = {
+    fullName: text,
+      image: url,
+      phone: tel,
+      email,
+      program,
+      graduationYear: graduationYear,
+      graduated: checkbox,
+  }
+
+   setStudents([newStudent, ...students])
+
+  setText("")
+  setUrl("")
+  setTel("")
+  setEmail("")
+  setCheckBox(false);
+  setProgram("")
+  setGraduationYear("")
+}
   return (
     <div className="App pt-20">
       <Navbar />
 
-      {/* FORM */}
-      <form>
+       {/* FORM */}
+       <form onSubmit={handleSubmit}>
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input name="fullName" value={text} onChange={handleTextInput} type="text" placeholder="Full Name" />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input name="image" type="url" value={url} onChange={handleUrlInput} placeholder="Profile Image" />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input name="phone" type="tel" value={tel} onChange={handleTelInput} placeholder="Phone" />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input name="email" type="email" value={email} onChange={handleEmailInput} placeholder="Email" />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select name="program" value={program} onChange={handleProgramInput}>
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -53,6 +90,8 @@ function App() {
           <label>
             Graduation Year
             <input
+              value={graduationYear}
+              onChange={handleGraduationYearInput}
               name="graduationYear"
               type="number"
               placeholder="Graduation Year"
@@ -65,20 +104,16 @@ function App() {
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input name="graduated" type="checkbox" onChange={handleCheckBox} checked={checkbox}/>
           </label>
 
-          <button type="submit">Add Student</button>
+          <button type="submit" onChange={handleSubmit}>Add Student</button>
         </div>
 
       </form>
       {/* FORM END */}
-
-
-      {/* TABLE/LIST HEADER */}
-      <TableHeader />
-
-
+{/* TABLE/LIST HEADER */}
+<TableHeader />
       {/* STUDENT LIST */}
       {students &&
         students.map((student) => {
