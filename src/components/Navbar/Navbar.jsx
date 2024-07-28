@@ -1,5 +1,5 @@
-import logo from "./../assets/logo-ironhack-blue.png";
-import profile from "./../assets/profile-icon.png";
+import logo from "../../assets/logo-ironhack-blue.png";
+import profile from "../../assets/profile-icon.png";
 
 function Navbar() {
   return (
@@ -13,7 +13,7 @@ function Navbar() {
         </div>
 
         <div className="flex justify-center w-1/2">
-        <span className="text-xl">
+          <span className="text-xl">
             Cohort Tools
           </span>
         </div>
