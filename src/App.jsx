@@ -6,43 +6,74 @@ import StudentCard from "./components/StudentCard";
 
 import studentsData from "./assets/students.json";
 
-function App() {
+function App(){
+
   const [students, setStudents] = useState(studentsData);
 
+  const [fullName, SetFullName] = useState("");
+  const [image, SetImage] = useState("");
+  const [phone, SetPhone] = useState("");
+  const [email, SetEmail] = useState("");
+  const [program, SetProgram] = useState("");
+  const [graduation, SetGraduation] = useState("");
+  const [graduated, Setgraduated] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+   
+    const newStudent = {
+      fullName: fullName,
+      image: image,
+      phone: phone,
+      email: email,
+      program: program,
+      graduation: graduation,
+      graduated: graduated,  
+
+    }
+    
+    const NewStudentList = [newStudent, ...students];
+    setStudents(NewStudentList);
+    
+  }
+
+    
 
   return (
-    <div className="App pt-20">
+    <div className="App pt-20" >
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <span>Add a Student</span>
+
+       
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input name="fullName" type="text" placeholder="Full Name" value={fullName} onChange={(e) => { SetFullName(e.target.value) }}  />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input name="image" type="url" placeholder="Profile Image" value={image} onChange={(e) => { SetImage(e.target.value) }}  />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input name="phone" type="tel" placeholder="Phone" value={phone} onChange={(e) => { SetPhone(e.target.value) }}  />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input name="email" type="email" placeholder="Email" value={email} onChange={(e) => { SetEmail(e.target.value) }}  />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select name="program" value={program} onChange={(e) => { SetProgram(e.target.value) }}  >
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -60,12 +91,14 @@ function App() {
               maxLength={4}
               min={2023}
               max={2030}
+              value={graduation} 
+              onChange={(e) => { SetGraduation(e.target.value) }} 
             />
           </label>
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input name="graduated" type="checkbox" value={graduated} onChange={(e) => { Setgraduated(e.target.value) }}  />
           </label>
 
           <button type="submit">Add Student</button>
