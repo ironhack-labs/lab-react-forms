@@ -8,84 +8,92 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [fullName, setFullName] = useState("");
+  const [image, setImage] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+
+  const [program, setProgram] = useState("option1");
+
+  const [graduationYear, setGraduationYear] = useState(2023);
+
+  const [graduated, setGraduated] = useState(false);
+  const handleFullNameChange = (e) => setFullName(e.target.value);
+  const handleImageChange = (e) => setImage(e.target.value);
+  const handlePhoneChange = (e) => setPhone(e.target.value);
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handleProgramChange = (e) => setProgram(e.target.value);
+  const handleGraduationYearChange = (e) => setGraduationYear(Number(e.target.value));
+  const handleGraduatedChange = (e) => setGraduated(e.target.checked);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newStudent = {
+      fullName,
+      image,
+      phone,
+      email,
+      program,
+      graduationYear,
+      graduated
+    };
+
+    // Update students array
+    setStudents([...students, newStudent]);
+
+    // Optionally clear the form
+    setFullName("");
+    setImage("");
+    setPhone("");
+    setEmail("");
+    setProgram("option1");
+    setGraduationYear(2023);
+    setGraduated(false);
+  };
 
 
   return (
-    <div className="App pt-20">
-      <Navbar />
-
-      {/* FORM */}
-      <form>
-        <span>Add a Student</span>
-        <div>
-          <label>
-            Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
-          </label>
-
-          <label>
-            Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
-          </label>
-
-          <label>
-            Phone
-            <input name="phone" type="tel" placeholder="Phone" />
-          </label>
-
-          <label>
-            Email
-            <input name="email" type="email" placeholder="Email" />
-          </label>
-        </div>
-
-        <div>
-          <label>
-            Program
-            <select name="program">
-              <option value="">-- None --</option>
-              <option value="Web Dev">Web Dev</option>
-              <option value="UXUI">UXUI</option>
-              <option value="Data">Data</option>
-            </select>
-          </label>
-
-          <label>
-            Graduation Year
-            <input
-              name="graduationYear"
-              type="number"
-              placeholder="Graduation Year"
-              minLength={4}
-              maxLength={4}
-              min={2023}
-              max={2030}
-            />
-          </label>
-
-          <label>
-            Graduated
-            <input name="graduated" type="checkbox" />
-          </label>
-
-          <button type="submit">Add Student</button>
-        </div>
-
-      </form>
-      {/* FORM END */}
-
-
-      {/* TABLE/LIST HEADER */}
-      <TableHeader />
-
-
-      {/* STUDENT LIST */}
-      {students &&
-        students.map((student) => {
-          return <StudentCard key={student.email} {...student} />;
-        })}
-    </div>
+    <div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="fullName">Full Name:</label>
+        <input
+          id="fullName"
+          name="fullName"
+          type="text"
+          value={fullName}
+          onChange={handleFullNameChange}
+        />
+      </div>
+   
+   
+   <form>
+    <input name="fullName" value={fullName} onChange={(e) => setFullName(e.target.value)} type="text" />
+    <input name="image" value={image} onChange={(e) => setImage(e.target.value)} type="url" />
+    <input name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" />
+    <input name="email" value={email} onChange={(e) => setEmail(e.target.value)} type="email" />
+    
+    <select name="program" value={program} onChange={(e) => setProgram(e.target.value)}>
+      <option value="option1">Option 1</option>
+      <option value="option2">Option 2</option>
+      <option value="option3">Option 3</option>
+    </select>
+    
+    <input
+      name="graduationYear"
+      value={graduationYear}
+      onChange={(e) => setGraduationYear(Number(e.target.value))}
+      type="number"
+      min="2023"
+      max="2030"
+      minLength="4"
+      maxLength="4"
+    />
+    
+    <input name="graduated" checked={graduated} onChange={(e) => setGraduated(e.target.checked)} type="checkbox" />
+  </form>
   );
-}
+};
 
 export default App;
