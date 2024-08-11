@@ -2,6 +2,9 @@ import logo from "./../assets/logo-ironhack-blue.png";
 import profile from "./../assets/profile-icon.png";
 
 function Navbar() {
+
+  
+
   return (
     <nav className="bg-blue-600 text-white shadow-md fixed top-0 left-0 w-full z-50">
       <div className="flex justify-between h-20 items-center px-4">
