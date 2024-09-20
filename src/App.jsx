@@ -8,34 +8,117 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [fullName, setFullName] = useState("");
+  const [image, setImage] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [program, setProgram] = useState("Web Development");
+  const [graduationYear, setGraduationYear] = useState(2023);
+  const [graduated, setGraduated] = useState(false);
 
+  const handleFullNameChange = (e) => setFullName(e.target.value);
+  const handleImageChange = (e) => setImage(e.target.value);
+  const handlePhoneChange = (e) => setPhone(e.target.value);
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handleProgramChange = (e) => setProgram(e.target.value);
+  const handleGraduationYearChange = (e) => setGraduationYear(e.target.value);
+  const handleGraduatedChange = (e) => setGraduated(e.target.checked);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newStudent = {
+      fullName,
+      image,
+      phone,
+      email,
+      program,
+      graduationYear,
+      graduated,
+    };
+
+    setStudents([...students, newStudent]);
+    setFullName("");
+    setImage("");
+    setPhone("");
+    setEmail("");
+    setProgram("Web Development");
+    setGraduationYear(2023);
+    setGraduated(false);
+  };
+
+  {
+    /*   const handleTitleInput = (e) => setTitle(e.target.value);
+
+  const handleDirectorInput = (e) => setDirector(e.target.value);
+
+  const handleRatingInput = (e) => setIMDBRating(e.target.value);
+
+  const handleOscarsInput = (e) => setHasOscars(e.target.checked);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newMovie = { title, director, IMDBRating, hasOscars };
+    
+    console.log("Submitted", newMovie);
+    props.addMovie(newMovie);
+
+    // Reset the state
+    setTitle("");
+    setDirector("");
+    setIMDBRating(5);
+    setHasOscars(true);
+  */
+  }
 
   return (
     <div className="App pt-20">
       <Navbar />
 
-      {/* FORM */}
-      <form>
-        <span>Add a Student</span>
+      <span>Add a Student</span>
+      <form onSubmit={handleSubmit}>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input
+              name="fullName"
+              type="text"
+              placeholder="Full Name"
+              value={fullName}
+              onChange={handleFullNameChange}
+            />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input
+              name="image"
+              type="url"
+              placeholder="Profile Image"
+              value={image}
+              onChange={handleImageChange}
+            />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input
+              name="phone"
+              type="tel"
+              placeholder="Phone"
+              value={phone}
+              onChange={handlePhoneChange}
+            />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={handleEmailChange}
+            />
           </label>
         </div>
 
@@ -60,26 +143,27 @@ function App() {
               maxLength={4}
               min={2023}
               max={2030}
+              value={graduationYear}
+              onChange={handleGraduationYearChange}
             />
           </label>
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input
+              name="graduated"
+              type="checkbox"
+              value={graduated}
+              onChange={handleGraduatedChange}
+            />
           </label>
 
           <button type="submit">Add Student</button>
         </div>
-
       </form>
-      {/* FORM END */}
 
-
-      {/* TABLE/LIST HEADER */}
       <TableHeader />
 
-
-      {/* STUDENT LIST */}
       {students &&
         students.map((student) => {
           return <StudentCard key={student.email} {...student} />;
