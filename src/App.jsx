@@ -1,83 +1,64 @@
-import "./App.css";
 import { useState } from "react";
+import studentsData from "./assets/students.json";
+import "./App.css";
 import Navbar from "./components/Navbar";
 import TableHeader from "./components/TableHeader";
 import StudentCard from "./components/StudentCard";
-
-import studentsData from "./assets/students.json";
+import AddStudent from "./components/AddStudent";
 
 function App() {
+  // state created to handle changes and update students
   const [students, setStudents] = useState(studentsData);
 
+  // function created to add new students
+  const handleAddStudent = (newStudent) => {
+    // adds the new student; prevStudents used to provide the latest studentsData state
+    setStudents((prevStudents) => [...prevStudents, newStudent]);
+  };
+
+  /* REFACTORING ALL INPUT FUNCTIONS TO USE ONLY ONE !!! IN AddStudent.jsx
+
+  const handleFullNameChange = (event) => {
+    // console.log(event.target.value)
+    // let value = event.target.value
+    setFullNameValue(event.target.value);
+  };
+
+  const handleProfileImageChange = (event) => {
+    setProfileImageValue(event.target.value);
+  };
+
+  const handlePhoneValueChange = (event) => {
+    setPhoneValue(event.target.value);
+  };
+
+  const handleEmailValueChange = (event) => {
+    setEmailValue(event.target.value);
+  };
+
+  const handleProgramChange = (event) => {
+    setProgramValue(event.target.value);
+  };
+
+  const handleGraduationYearChange = (event) => {
+    setGraduationYearValue(event.target.value);
+  };
+
+  const handleGraduatedChange = (event) => {
+    setGraduatedValue(event.target.value);
+  };
+
+*/
 
   return (
     <div className="App pt-20">
       <Navbar />
 
-      {/* FORM */}
-      <form>
-        <span>Add a Student</span>
-        <div>
-          <label>
-            Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
-          </label>
-
-          <label>
-            Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
-          </label>
-
-          <label>
-            Phone
-            <input name="phone" type="tel" placeholder="Phone" />
-          </label>
-
-          <label>
-            Email
-            <input name="email" type="email" placeholder="Email" />
-          </label>
-        </div>
-
-        <div>
-          <label>
-            Program
-            <select name="program">
-              <option value="">-- None --</option>
-              <option value="Web Dev">Web Dev</option>
-              <option value="UXUI">UXUI</option>
-              <option value="Data">Data</option>
-            </select>
-          </label>
-
-          <label>
-            Graduation Year
-            <input
-              name="graduationYear"
-              type="number"
-              placeholder="Graduation Year"
-              minLength={4}
-              maxLength={4}
-              min={2023}
-              max={2030}
-            />
-          </label>
-
-          <label>
-            Graduated
-            <input name="graduated" type="checkbox" />
-          </label>
-
-          <button type="submit">Add Student</button>
-        </div>
-
-      </form>
-      {/* FORM END */}
-
+      {/* ********* ADD STUDENT FORM RENDERED HERE ********* */}
+      <AddStudent handleAddStudent={handleAddStudent} />
 
       {/* TABLE/LIST HEADER */}
       <TableHeader />
-
 
       {/* STUDENT LIST */}
       {students &&
