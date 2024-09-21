@@ -9,40 +9,75 @@ import studentsData from "./assets/students.json";
 function App() {
   const [students, setStudents] = useState(studentsData);
 
+  const [fullName, setFullName] = useState("");
+  const [image, setImage]= useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [program, setProgram] = useState("");
+  const [graduationYear, setGraduationYear] = useState(2023);
+  const [graduated, setGraduated] = useState(false);
+
+const addNewStudent =(event) => {
+
+  event.preventDefault();
+
+  const newStudent = {
+    fullName: fullName,
+    image: image,
+    phone: phone,
+    email: email,
+    program: program,
+    graduationYear: graduationYear,
+    graduated: graduated,
+  }
+ 
+ const clone =  [newStudent, ...students]
+  setStudents(clone);
+}
+
+const fullNameChange = (event)=> {setFullName(event.target.value)}
+const imageChange = (event)=> {setImage(event.target.value)}
+const phoneChange = (event)=> {setPhone(event.target.value)}
+const emailChange = (event)=> {setEmail(event.target.value)}
+const programChange = (event)=> {setProgram(event.target.value)}
+const graduationYearChange = (event)=> {setGraduationYear(event.target.value)}
+const graduatedChange = (event)=> {setGraduated(event.target.checked)}
+
+
 
   return (
     <div className="App pt-20">
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={addNewStudent}>
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input onChange={fullNameChange} name="fullName" type="text" placeholder="Full Name" />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input onChange={imageChange} name="image" type="url" placeholder="Profile Image" />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input onChange={phoneChange} name="phone" type="tel" placeholder="Phone" />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input onChange={emailChange} name="email" type="email" placeholder="Email" />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select onChange={programChange} name="program">
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -52,7 +87,7 @@ function App() {
 
           <label>
             Graduation Year
-            <input
+            <input onChange={graduationYearChange}
               name="graduationYear"
               type="number"
               placeholder="Graduation Year"
@@ -65,7 +100,7 @@ function App() {
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input checked={graduated} onChange={graduatedChange} name="graduated" type="checkbox" />
           </label>
 
           <button type="submit">Add Student</button>
