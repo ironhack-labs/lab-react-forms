@@ -5,9 +5,7 @@ function TableHeader() {
         className="flex items-center justify-center m-left-2"
         style={{ flexBasis: "16%" }}
       >
-      <p>
-        Image
-      </p>
+        <p>Image</p>
       </span>
       <span style={{ flexBasis: "16%" }}>Name</span>
       <span style={{ flexBasis: "16%" }}>Program</span>
