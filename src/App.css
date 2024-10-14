@@ -4,7 +4,7 @@
 
 /* Primary Button */
 .btn-primary {
-  background-color: var(--primary-color);
+  background-color: #1d4ed8; /* Blue */
   color: white;
   padding: 8px 16px;
   border-radius: 8px;
@@ -12,22 +12,21 @@
 }
 
 .btn-primary:hover {
-  background-color: #3B82F6;
+  background-color: #3b82f6; /* Light Blue */
 }
 
 /* Secondary Button */
 .btn-secondary {
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
+  border: 2px solid #1d4ed8; /* Blue */
+  color: #1d4ed8; /* Blue */
   padding: 8px 16px;
   border-radius: 8px;
   transition: background-color 0.3s;
 }
 
 .btn-secondary:hover {
-  background-color: #E5E7EB;
+  background-color: #e5e7eb; /* Light Gray */
 }
-
 
 /* Spacing utilities */
 .spacing-xs {
@@ -83,9 +82,14 @@
 }
 
 .StudentCard span {
-word-break: break-all; /* Non standard for webkit */ 
-word-break: break-word; 
--webkit-hyphens:none; 
--moz-hyphens: none; 
-hyphens: noine;
+  word-break: break-all; /* Non-standard for webkit */
+  word-break: break-word;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  hyphens: none;
+}
+
+/* Table Styles */
+.overflow-x-auto {
+  overflow-x: auto;
 }

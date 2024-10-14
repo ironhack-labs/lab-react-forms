@@ -1,91 +1,63 @@
-import "./App.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar";
-import TableHeader from "./components/TableHeader";
+import AddStudent from "./components/AddStudent";
 import StudentCard from "./components/StudentCard";
+import TableHeader from "./components/TableHeader";
+import "./App.css";
 
-import studentsData from "./assets/students.json";
+const App = () => {
+  const [students, setStudents] = useState([
+    {
+      fullName: "Christine Clayton",
+      email: "chris.c@example.com",
+      phone: "567-890-1234",
+      program: "Web Dev",
+      image:
+        "https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-cohort-tools-routing/profile-3.png",
+      graduationYear: 2023,
+      graduated: true,
+    },
+    {
+      fullName: "Grace Green",
+      email: "grace.g@example.com",
+      phone: "901-234-5678",
+      program: "Web Dev",
+      image:
+        "https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-cohort-tools-routing/profile-7.png",
+      graduationYear: 2023,
+      graduated: false,
+    },
+    {
+      fullName: "Jack Johnson",
+      email: "jack.j@example.com",
+      phone: "234-567-8901",
+      program: "Web Dev",
+      image:
+        "https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-cohort-tools-routing/profile-5.png",
+      graduationYear: 2024,
+      graduated: false,
+    },
+  ]);
 
-function App() {
-  const [students, setStudents] = useState(studentsData);
-
+  const handleAddStudent = (newStudent) => {
+    setStudents([...students, newStudent]);
+  };
 
   return (
-    <div className="App pt-20">
+    <div className="App">
       <Navbar />
-
-      {/* FORM */}
-      <form>
-        <span>Add a Student</span>
-        <div>
-          <label>
-            Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
-          </label>
-
-          <label>
-            Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
-          </label>
-
-          <label>
-            Phone
-            <input name="phone" type="tel" placeholder="Phone" />
-          </label>
-
-          <label>
-            Email
-            <input name="email" type="email" placeholder="Email" />
-          </label>
+      <div className="container mx-auto mt-20">
+        <h1 className="text-2xl font-bold">Cohort Tools</h1>
+        <AddStudent onAddStudent={handleAddStudent} />
+        <div className="overflow-x-auto mt-5">
+          <TableHeader />
+          {students.map((student, index) => (
+            <StudentCard key={index} {...student} />
+          ))}
         </div>
-
-        <div>
-          <label>
-            Program
-            <select name="program">
-              <option value="">-- None --</option>
-              <option value="Web Dev">Web Dev</option>
-              <option value="UXUI">UXUI</option>
-              <option value="Data">Data</option>
-            </select>
-          </label>
-
-          <label>
-            Graduation Year
-            <input
-              name="graduationYear"
-              type="number"
-              placeholder="Graduation Year"
-              minLength={4}
-              maxLength={4}
-              min={2023}
-              max={2030}
-            />
-          </label>
-
-          <label>
-            Graduated
-            <input name="graduated" type="checkbox" />
-          </label>
-
-          <button type="submit">Add Student</button>
-        </div>
-
-      </form>
-      {/* FORM END */}
-
-
-      {/* TABLE/LIST HEADER */}
-      <TableHeader />
-
-
-      {/* STUDENT LIST */}
-      {students &&
-        students.map((student) => {
-          return <StudentCard key={student.email} {...student} />;
-        })}
+      </div>
     </div>
   );
-}
+};
 
 export default App;
