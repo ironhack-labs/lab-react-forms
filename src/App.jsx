@@ -8,41 +8,105 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    image: "",
+    phone: "",
+    email: "",
+    program: "",
+    graduationYear: "",
+    graduated: false,
+  });
 
+  // Function to handle form input changes
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  // Function to add a new student
+  const handleAddStudent = (e) => {
+    e.preventDefault();
+    setStudents([...students, formData]);
+
+    // Reset the form
+    setFormData({
+      fullName: "",
+      image: "",
+      phone: "",
+      email: "",
+      program: "",
+      graduationYear: "",
+      graduated: false,
+    });
+  };
 
   return (
     <div className="App pt-20">
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={handleAddStudent}>
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input
+              name="fullName"
+              type="text"
+              placeholder="Full Name"
+              value={formData.fullName}
+              onChange={handleChange}
+              required
+            />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input
+              name="image"
+              type="url"
+              placeholder="Profile Image"
+              value={formData.image}
+              onChange={handleChange}
+            />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input
+              name="phone"
+              type="tel"
+              placeholder="Phone"
+              value={formData.phone}
+              onChange={handleChange}
+            />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select
+              name="program"
+              value={formData.program}
+              onChange={handleChange}
+            >
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -56,8 +120,8 @@ function App() {
               name="graduationYear"
               type="number"
               placeholder="Graduation Year"
-              minLength={4}
-              maxLength={4}
+              value={formData.graduationYear}
+              onChange={handleChange}
               min={2023}
               max={2030}
             />
@@ -65,19 +129,21 @@ function App() {
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input
+              name="graduated"
+              type="checkbox"
+              checked={formData.graduated}
+              onChange={handleChange}
+            />
           </label>
 
           <button type="submit">Add Student</button>
         </div>
-
       </form>
       {/* FORM END */}
 
-
       {/* TABLE/LIST HEADER */}
       <TableHeader />
-
 
       {/* STUDENT LIST */}
       {students &&
