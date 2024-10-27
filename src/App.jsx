@@ -8,8 +8,30 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [fullName, setFullName] = useState("");
+  const [profileImage, setProfileImage] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [program, setProgram] = useState("");
+  const [graduationYear, setGraduationYear] = useState(2023);
+  const [graduated, setGraduated] = useState(false);
 
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newStudent = {
+      fullName: fullName,
+      email: email,
+      phone: phone,
+      program: program,
+      image: profileImage,
+      graduationYear: graduationYear,
+      graduated: graduated,
+    };
+    console.log(newStudent);
+    const newArr = [newStudent, ...students];
+    console.log(newArr);
+    setStudents(newArr);
+  };
   return (
     <div className="App pt-20">
       <Navbar />
@@ -20,29 +42,66 @@ function App() {
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input
+              name="fullName"
+              type="text"
+              placeholder="Full Name"
+              value={fullName}
+              onChange={(e) => {
+                setFullName(e.target.value);
+              }}
+            />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input
+              name="image"
+              type="url"
+              placeholder="Profile Image"
+              value={profileImage}
+              onChange={(e) => {
+                setProfileImage(e.target.value);
+              }}
+            />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input
+              name="phone"
+              type="tel"
+              placeholder="Phone"
+              value={phone}
+              onChange={(e) => {
+                setPhone(e.target.value);
+              }}
+            />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select
+              name="program"
+              onChange={(e) => {
+                setProgram(e.target.value);
+              }}
+            >
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -53,6 +112,10 @@ function App() {
           <label>
             Graduation Year
             <input
+              onChange={(e) => {
+                setGraduationYear(e.target.value);
+              }}
+              value={graduationYear}
               name="graduationYear"
               type="number"
               placeholder="Graduation Year"
@@ -65,19 +128,25 @@ function App() {
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input
+              name="graduated"
+              type="checkbox"
+              checked={graduated}
+              onChange={(e) => {
+                setGraduated(e.target.value);
+              }}
+            />
           </label>
 
-          <button type="submit">Add Student</button>
+          <button type="submit" onClick={handleSubmit}>
+            Add Student
+          </button>
         </div>
-
       </form>
       {/* FORM END */}
 
-
       {/* TABLE/LIST HEADER */}
       <TableHeader />
-
 
       {/* STUDENT LIST */}
       {students &&
