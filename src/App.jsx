@@ -8,41 +8,112 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [fullName, setFullName] = useState("");
+  const [image, setImage] = useState("");
+  const [phone, setPhone] = useState(0);
+  const [email, setEmail] = useState("");
+  const [program, setpProgram] = useState();
+  const [graduationYear, setGraduationYear] = useState(0);
+  const [graduated, setGraduated] = useState(false);
 
+  const newStudentDets = {
+    fullName: fullName,
+    email: email,
+    phone: phone,
+    program: program,
+    image: image,
+    graduationYear: graduationYear,
+    graduated: graduated,
+  };
+
+  const createStudent = () => {
+    setStudents((prevStudents) => [...prevStudents, newStudentDets]);
+
+    setFullName("");
+    setImage("");
+    setPhone(0);
+    setEmail("");
+    setProgram("");
+    setGraduationYear(0);
+    setGraduated(false);
+  };
 
   return (
     <div className="App pt-20">
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          createStudent(newStudentDets);
+        }}
+      >
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input
+              name="fullName"
+              type="text"
+              placeholder="Full Name"
+              value={fullName}
+              onChange={(e) => {
+                setFullName(e.target.value);
+              }}
+            />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input
+              name="image"
+              type="url"
+              placeholder="Profile Image"
+              value={image}
+              onChange={(e) => {
+                setImage(e.target.value);
+              }}
+            />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input
+              name="phone"
+              type="tel"
+              placeholder="Phone"
+              value={phone}
+              onChange={(e) => {
+                setPhone(e.target.value);
+              }}
+            />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select
+              name="program"
+              value={program}
+              onChange={(e) => {
+                setProgram(e.target.value);
+              }}
+            >
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -60,24 +131,32 @@ function App() {
               maxLength={4}
               min={2023}
               max={2030}
+              value={graduationYear}
+              onChange={(e) => {
+                setGraduationYear(e.target.value);
+              }}
             />
           </label>
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input
+              name="graduated"
+              type="checkbox"
+              value={graduated}
+              onChange={(e) => {
+                setGraduated(e.target.value);
+              }}
+            />
           </label>
 
           <button type="submit">Add Student</button>
         </div>
-
       </form>
       {/* FORM END */}
 
-
       {/* TABLE/LIST HEADER */}
       <TableHeader />
-
 
       {/* STUDENT LIST */}
       {students &&
