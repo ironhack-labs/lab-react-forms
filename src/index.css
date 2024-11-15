@@ -1,5 +1,5 @@
 /* Typography */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 /* Tailwind directives */
 @tailwind base;
@@ -8,10 +8,10 @@
 
 /* Colors */
 :root {
-    --primary-color: #1E40AF;
-    --secondary-color: #3B82F6;
-    --background-color: #F3F4F6;
-    --text-color: #111827;
+  --primary-color: #1e40af;
+  --secondary-color: #3b82f6;
+  --background-color: #f3f4f6;
+  --text-color: #111827;
 }
 
 /* Base styles */
@@ -20,8 +20,8 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: #F3F4F6;
+  font-family: "Inter", sans-serif;
+  background-color: #f3f4f6;
   color: #111827;
   margin: 0;
   background-color: var(--background-color);
@@ -77,7 +77,7 @@ form {
   padding: 1.5rem; /* Add some padding to create the card effect */
   border: 1px solid #ccc; /* Add a border to make it recognizable */
   border-radius: 0.5rem; /* Rounded corners for the card */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the card */  
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the card */
 }
 
 form span {
@@ -111,7 +111,7 @@ input[type="checkbox"] {
   margin-top: 0.5rem;
   margin-left: 0.2rem;
   display: block;
-  transform: scale(1.5)
+  transform: scale(1.5);
 }
 
 label {
@@ -152,4 +152,8 @@ button[type="submit"]:hover {
   margin-bottom: 20px;
   background: #94a7c8;
   border-radius: 4px;
+}
+
+.StudentCard {
+  /* max-width: 800px; */
 }
