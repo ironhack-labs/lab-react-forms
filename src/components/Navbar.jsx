@@ -4,29 +4,31 @@ import profile from "./../assets/profile-icon.png";
 function Navbar() {
   return (
     <nav className="bg-blue-600 text-white shadow-md fixed top-0 left-0 w-full z-50">
-      <div className="flex justify-between h-20 items-center px-4">
-        <div className="flex items-center space-x-2 w-1/4">
-
-          <button className="flex items-center text-l py-1">
-            <img src={logo} alt="Logo" className="h-8 w-auto" />
+      <div className="flex justify-between items-center h-20 px-4">
+        
+        {/* Sección izquierda: Logo */}
+        <div className="flex items-center space-x-2">
+          <button className="flex items-center text-lg py-1">
+            <img src={logo} alt="Ironhack Logo" className="h-8 w-auto" />
           </button>
         </div>
-
-        <div className="flex justify-center w-1/2">
-        <span className="text-xl">
+        
+        {/* Sección central: Título */}
+        <div className="flex justify-center">
+          <span className="text-xl font-semibold tracking-wide">
             Cohort Tools
           </span>
         </div>
-
-        <div className="w-1/4 flex justify-end mr-4">
-          <button className="flex items-center text-l py-1">
+        
+        {/* Sección derecha: Perfil */}
+        <div className="flex justify-end">
+          <button className="flex items-center text-lg py-1">
             <img
               src={profile}
-              alt="Profile photo"
-              className="h-10 w-auto border-solid border border-white rounded-3xl p-1"
+              alt="Profile"
+              className="h-10 w-10 border border-white rounded-full p-1 object-cover"
             />
           </button>
-
         </div>
       </div>
     </nav>
