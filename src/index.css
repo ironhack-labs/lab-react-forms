@@ -1,12 +1,11 @@
-/* Typography */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* Tailwind directives */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Colors */
+
 :root {
     --primary-color: #1E40AF;
     --secondary-color: #3B82F6;
@@ -14,7 +13,7 @@
     --text-color: #111827;
 }
 
-/* Base styles */
+
 html {
   font-size: 16px;
 }
@@ -28,14 +27,14 @@ body {
   color: var(--text-color);
 }
 
-/* Container */
+
 .container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 16px;
 }
 
-/* Styles */
+
 h1 {
   font-size: 2rem;
   font-weight: 700;
@@ -64,7 +63,7 @@ nav {
   z-index: 20;
 }
 
-/* Forms */
+
 form {
   position: relative;
   display: flex;
@@ -74,10 +73,10 @@ form {
   max-width: 600px;
   margin: 1.5rem auto;
 
-  padding: 1.5rem; /* Add some padding to create the card effect */
-  border: 1px solid #ccc; /* Add a border to make it recognizable */
-  border-radius: 0.5rem; /* Rounded corners for the card */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the card */  
+  padding: 1.5rem; 
+  border: 1px solid #ccc; 
+  border-radius: 0.5rem; 
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 form span {
