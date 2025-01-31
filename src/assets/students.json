@@ -1,5 +1,4 @@
 [
-
   {
     "fullName": "Christine Clayton",
     "email": "chris.c@example.com",
@@ -15,7 +14,7 @@
     "phone": "901-234-5678",
     "program": "Web Dev",
     "image": "https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-cohort-tools-routing/profile-7.png",
-    "graduationYear": 2023,    
+    "graduationYear": 2023,
     "graduated": false
   },
   {
@@ -24,7 +23,7 @@
     "phone": "234-567-8901",
     "program": "Web Dev",
     "image": "https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-cohort-tools-routing/profile-5.png",
-    "graduationYear": 2024,    
+    "graduationYear": 2024,
     "graduated": false
   }
 ]
