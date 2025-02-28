@@ -7,7 +7,80 @@ import StudentCard from "./components/StudentCard";
 import studentsData from "./assets/students.json";
 
 function App() {
+
+  // ESTADOS
   const [students, setStudents] = useState(studentsData);
+
+  const [nombreCompletoEstudiantes, setNombreCompletoEstudiantes] = useState("");
+  const [imagenEstudiante, setImagenEstudiante] = useState("");
+  const [telefonoEstudiante, setTelefonoEstudiante] = useState("");
+  const [emailEstudiante, setEmailEstudiante] = useState("");
+  const [programaEstudiante, setProgramaEstudiante] = useState("");
+  const [ageGraduacionEstudiante, setAgeGraduacionEstudiante ] = useState(2023);
+  const [estudianteGraduado, setEstudianteGraduado] = useState(false);
+
+
+  // FUNCIONES DE CONTROL DE ESTADOS
+  const introducirNombreEstudiante = (evento) => {
+    setNombreCompletoEstudiantes(evento.target.value)
+   
+  }
+  const introducirImagenEstudiante = (evento) => {
+    setImagenEstudiante(evento.target.value)
+  }
+  const introducirTelefonoEstudiante = (evento) => {
+    setTelefonoEstudiante(evento.target.value)
+  }
+  const introducirEmailEstudiante = (evento) => {
+    setEmailEstudiante(evento.target.value)
+  }
+  const introducirProgramaEstudiante = (evento) => {
+    setProgramaEstudiante(evento.target.value)
+  }
+  const introducirAnyoGraduacionEstudiante = (evento) => {
+    setAgeGraduacionEstudiante(evento.target.value)
+  }
+  const introducirEstudianteGraduado = (evento) => {
+    setEstudianteGraduado(evento.target.checked)
+  }
+
+
+  // ENVÍO FORMULARIO
+
+  const enviarFormulario = (evento) => {
+    evento.preventDefault();
+    console.log("Entregando Formulario...")
+
+
+    // Creamos al nuevo estudiante con los valores del formulario
+    const nuevoEstudiante = {
+        fullName: nombreCompletoEstudiantes,
+        email: emailEstudiante,
+        phone: telefonoEstudiante,
+        program: programaEstudiante,
+        image: imagenEstudiante,
+        graduationYear: ageGraduacionEstudiante,
+        graduated: estudianteGraduado
+        
+    }
+
+    // Actualizmaos la data con el nuevo estudiante
+    const clone = [...students];
+    clone.push(nuevoEstudiante)
+    console.log(clone)
+    setStudents(clone);
+
+    // Reiniciamos los campos del Formulario
+    setNombreCompletoEstudiantes("")
+    setImagenEstudiante("")
+    setTelefonoEstudiante("")
+    setEmailEstudiante("")
+    setProgramaEstudiante("")
+    setAgeGraduacionEstudiante(2023)
+    setEstudianteGraduado(false)
+
+
+  }
 
 
   return (
@@ -15,34 +88,34 @@ function App() {
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={enviarFormulario}>
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input onChange={introducirNombreEstudiante} name="fullName" value={nombreCompletoEstudiantes} type="text" placeholder="Full Name" />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input onChange={introducirImagenEstudiante} name="image" value={imagenEstudiante} type="url" placeholder="Profile Image" />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input onChange={introducirTelefonoEstudiante} name="phone" value={telefonoEstudiante} type="tel" placeholder="Phone" />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input onChange={introducirEmailEstudiante} name="email" value={emailEstudiante} type="email" placeholder="Email" />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select name="program" onChange={introducirProgramaEstudiante} value={programaEstudiante}>
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -53,6 +126,8 @@ function App() {
           <label>
             Graduation Year
             <input
+              onChange={introducirAnyoGraduacionEstudiante}
+              value={ageGraduacionEstudiante}
               name="graduationYear"
               type="number"
               placeholder="Graduation Year"
@@ -65,7 +140,7 @@ function App() {
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input onChange={introducirEstudianteGraduado} name="graduated" checked={estudianteGraduado} type="checkbox" />
           </label>
 
           <button type="submit">Add Student</button>
