@@ -22,7 +22,7 @@ function App() {
   const handleEmailChange = (event) => setEmail(event.target.value);
   const handleProgramChange = (event) => setProgram(event.target.value);
   const handleYearChange = (event) => setYear(event.target.value);
-  const handleGraduatedChange = (event) => setGraduated(event.target.value);
+  const handleGraduatedChange = (event) => setGraduated(event.target.checked);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -113,6 +113,7 @@ function App() {
             name="graduated"
             type="checkbox"
             onChange={handleGraduatedChange}
+            checked={graduated}
           />
 
           <button type="submit">Add Student</button>
