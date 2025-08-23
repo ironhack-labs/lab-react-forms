@@ -22,7 +22,8 @@ function App() {
       <TableHeader />
 
       {students.map((student) => (
-        <StudentCard key={student.email} {...student} />
+        <StudentCard key={student.id} {...student} />
+        
       ))}
     </div>
   );

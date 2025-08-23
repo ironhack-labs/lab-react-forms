@@ -1,5 +1,7 @@
 import { useState } from "react"
 function AddStudent({handleAddStudent}) {
+  
+
   const [fullName, setFullName] = useState('');
   const [image, setImage] = useState('');
   const [phone, setPhone] = useState('');
@@ -11,6 +13,7 @@ function AddStudent({handleAddStudent}) {
   const onSubmitForm = (e) => {
     e.preventDefault();
     const newStudent = {
+      id:Date.now(),
       fullName,
       image,
       phone,
@@ -27,8 +30,8 @@ function AddStudent({handleAddStudent}) {
     setProgram('');
     setGraduationYear(2023);
     setGraduated(false);
-    handleAddStudent(newStudent)
   };
+
   return (
     <div className="App pt-20">
 
