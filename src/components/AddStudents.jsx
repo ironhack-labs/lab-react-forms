@@ -1,22 +1,10 @@
 export default function AddStudents({
-  fullName,
-  setFullName,
-  image,
-  setImage,
-  phone,
-  setPhone,
-  email,
-  setEmail,
-  program,
-  setProgram,
-  graduated,
-  setGraduated,
-  graduationYear,
-  setGraduationYear,
   handleAddStudents,
+  handleChange,
+  value,
 }) {
   return (
-    <form>
+    <form onSubmit={handleAddStudents}>
       <span>Add a Student</span>
       <div>
         <label>
@@ -25,8 +13,8 @@ export default function AddStudents({
             name="fullName"
             type="text"
             placeholder="Full Name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            value={value.name}
+            onChange={(e) => handleChange(e)}
           />
         </label>
 
@@ -36,8 +24,8 @@ export default function AddStudents({
             name="image"
             type="url"
             placeholder="Profile Image"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
+            value={value.image}
+            onChange={(e) => handleChange(e)}
           />
         </label>
 
@@ -47,8 +35,8 @@ export default function AddStudents({
             name="phone"
             type="tel"
             placeholder="Phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            value={value.phone}
+            onChange={(e) => handleChange(e)}
           />
         </label>
 
@@ -58,8 +46,8 @@ export default function AddStudents({
             name="email"
             type="email"
             placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={value.email}
+            onChange={(e) => handleChange(e)}
           />
         </label>
       </div>
@@ -69,8 +57,8 @@ export default function AddStudents({
           Program
           <select
             name="program"
-            value={program}
-            onChange={(e) => setProgram(e.target.value)}
+            value={value.program}
+            onChange={(e) => handleChange(e)}
           >
             <option value="">-- None --</option>
             <option value="Web Dev">Web Dev</option>
@@ -89,8 +77,8 @@ export default function AddStudents({
             maxLength={4}
             min={2023}
             max={2030}
-            value={graduationYear}
-            onChange={(e) => setGraduationYear(e.target.value)}
+            value={value.graduationYear}
+            onChange={(e) => handleChange(e)}
           />
         </label>
 
@@ -99,20 +87,12 @@ export default function AddStudents({
           <input
             name="graduated"
             type="checkbox"
-            value={graduated}
-            onChange={(e) =>
-              setGraduated(
-                e.target.checked
-                  ? (e.target.value = true)
-                  : (e.target.value = false)
-              )
-            }
+            value={value.graduated}
+            onChange={(e) => handleChange(e)}
           />
         </label>
 
-        <button type="submit" onClick={(e) => handleAddStudents(e)}>
-          Add Student
-        </button>
+        <button type="submit">Add Student</button>
       </div>
     </form>
   );
