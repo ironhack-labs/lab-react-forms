@@ -1,91 +1,165 @@
-import "./App.css";
 import { useState } from "react";
-import Navbar from "./components/Navbar";
-import TableHeader from "./components/TableHeader";
-import StudentCard from "./components/StudentCard";
-
-import studentsData from "./assets/students.json";
+import "./App.css";
 
 function App() {
-  const [students, setStudents] = useState(studentsData);
+  // 1️⃣ Estado con lista de estudiantes
+  const [students, setStudents] = useState([
+    {
+      fullName: "Juan Pérez",
+      email: "juan@example.com",
+      phone: "666777888",
+      program: "Web Development",
+      image: "https://randomuser.me/api/portraits/men/45.jpg",
+      graduationYear: 2024,
+      graduated: false,
+    },
+  ]);
 
+  // 2️⃣ Estados para cada input del formulario
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [program, setProgram] = useState("Web Development");
+  const [image, setImage] = useState("");
+  const [graduationYear, setGraduationYear] = useState(2023);
+  const [graduated, setGraduated] = useState(false);
+
+  // 3️⃣ Función para manejar el envío del formulario
+  function handleSubmit(event) {
+    event.preventDefault(); // evita recargar la página
+
+    // Creamos un nuevo estudiante con los valores actuales
+    const newStudent = {
+      fullName: fullName,
+      email: email,
+      phone: phone,
+      program: program,
+      image: image,
+      graduationYear: graduationYear,
+      graduated: graduated,
+    };
+
+    // Agregamos el nuevo estudiante a la lista
+    setStudents([...students, newStudent]);
+
+    // Limpiamos el formulario
+    setFullName("");
+    setEmail("");
+    setPhone("");
+    setProgram("Web Development");
+    setImage("");
+    setGraduationYear(2023);
+    setGraduated(false);
+  }
 
   return (
-    <div className="App pt-20">
-      <Navbar />
+    <div className="App">
+      <h1>Bootcamp Students</h1>
 
-      {/* FORM */}
-      <form>
-        <span>Add a Student</span>
-        <div>
-          <label>
-            Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
-          </label>
+      {/* FORMULARIO */}
+      <form onSubmit={handleSubmit}>
+        <label>
+          Full Name:
+          <input
+            type="text"
+            name="fullName"
+            value={fullName}
+            onChange={(event) => setFullName(event.target.value)}
+            required
+          />
+        </label>
 
-          <label>
-            Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
-          </label>
+        <label>
+          Email:
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            required
+          />
+        </label>
 
-          <label>
-            Phone
-            <input name="phone" type="tel" placeholder="Phone" />
-          </label>
+        <label>
+          Phone:
+          <input
+            type="tel"
+            name="phone"
+            value={phone}
+            onChange={(event) => setPhone(event.target.value)}
+            required
+          />
+        </label>
 
-          <label>
-            Email
-            <input name="email" type="email" placeholder="Email" />
-          </label>
-        </div>
+        <label>
+          Program:
+          <select
+            name="program"
+            value={program}
+            onChange={(event) => setProgram(event.target.value)}
+          >
+            <option>Web Development</option>
+            <option>UX/UI Design</option>
+            <option>Data Analytics</option>
+            <option>Cybersecurity</option>
+          </select>
+        </label>
 
-        <div>
-          <label>
-            Program
-            <select name="program">
-              <option value="">-- None --</option>
-              <option value="Web Dev">Web Dev</option>
-              <option value="UXUI">UXUI</option>
-              <option value="Data">Data</option>
-            </select>
-          </label>
+        <label>
+          Image URL:
+          <input
+            type="url"
+            name="image"
+            value={image}
+            onChange={(event) => setImage(event.target.value)}
+          />
+        </label>
 
-          <label>
-            Graduation Year
-            <input
-              name="graduationYear"
-              type="number"
-              placeholder="Graduation Year"
-              minLength={4}
-              maxLength={4}
-              min={2023}
-              max={2030}
-            />
-          </label>
+        <label>
+          Graduation Year:
+          <input
+            type="number"
+            name="graduationYear"
+            min="2023"
+            max="2030"
+            value={graduationYear}
+            onChange={(event) => setGraduationYear(event.target.value)}
+          />
+        </label>
 
-          <label>
-            Graduated
-            <input name="graduated" type="checkbox" />
-          </label>
+        <label>
+          Graduated:
+          <input
+            type="checkbox"
+            name="graduated"
+            checked={graduated}
+            onChange={(event) => setGraduated(event.target.checked)}
+          />
+        </label>
 
-          <button type="submit">Add Student</button>
-        </div>
-
+        <button type="submit">Add Student</button>
       </form>
-      {/* FORM END */}
 
+      <hr />
 
-      {/* TABLE/LIST HEADER */}
-      <TableHeader />
-
-
-      {/* STUDENT LIST */}
-      {students &&
-        students.map((student) => {
-          return <StudentCard key={student.email} {...student} />;
-        })}
+      {/* LISTA DE ESTUDIANTES */}
+      <h2>Students List</h2>
+      <ul className="students-list">
+        {students.map((student, index) => (
+          <li key={index} className="student-card">
+            <img src={student.image} alt={student.fullName} />
+            <p><strong>{student.fullName}</strong></p>
+            <p>Email: {student.email}</p>
+            <p>Phone: {student.phone}</p>
+            <p>Program: {student.program}</p>
+            <p>Year: {student.graduationYear}</p>
+            <p>Graduated: {student.graduated ? "✅ Yes" : "❌ No"}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
 export default App;
+
