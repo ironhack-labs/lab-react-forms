@@ -1,89 +1,39 @@
-import "./App.css";
 import { useState } from "react";
-import Navbar from "./components/Navbar";
-import TableHeader from "./components/TableHeader";
-import StudentCard from "./components/StudentCard";
-
-import studentsData from "./assets/students.json";
+import AddStudent from "./components/AddStudent"; // Corrected path
 
 function App() {
-  const [students, setStudents] = useState(studentsData);
+  // State for students array
+  const [students, setStudents] = useState([]);
 
+  // Function to handle adding a new student
+  const handleAddStudent = (student) => {
+    setStudents((prevStudents) => [...prevStudents, student]);
+  };
 
   return (
-    <div className="App pt-20">
-      <Navbar />
+    <div className="App" style={{ padding: "20px", fontFamily: "Arial" }}>
+      <h1>Cohort Tools</h1>
 
-      {/* FORM */}
-      <form>
-        <span>Add a Student</span>
-        <div>
-          <label>
-            Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
-          </label>
+      {/* AddStudent form component */}
+      <AddStudent handleAddStudent={handleAddStudent} />
 
-          <label>
-            Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
-          </label>
-
-          <label>
-            Phone
-            <input name="phone" type="tel" placeholder="Phone" />
-          </label>
-
-          <label>
-            Email
-            <input name="email" type="email" placeholder="Email" />
-          </label>
-        </div>
-
-        <div>
-          <label>
-            Program
-            <select name="program">
-              <option value="">-- None --</option>
-              <option value="Web Dev">Web Dev</option>
-              <option value="UXUI">UXUI</option>
-              <option value="Data">Data</option>
-            </select>
-          </label>
-
-          <label>
-            Graduation Year
-            <input
-              name="graduationYear"
-              type="number"
-              placeholder="Graduation Year"
-              minLength={4}
-              maxLength={4}
-              min={2023}
-              max={2030}
+      {/* Student list */}
+      <h2>Students</h2>
+      <ul>
+        {students.map((student, index) => (
+          <li key={index} style={{ marginBottom: "10px" }}>
+            <img
+              src={student.image}
+              alt={student.fullName}
+              width={50}
+              style={{ marginRight: "10px" }}
             />
-          </label>
-
-          <label>
-            Graduated
-            <input name="graduated" type="checkbox" />
-          </label>
-
-          <button type="submit">Add Student</button>
-        </div>
-
-      </form>
-      {/* FORM END */}
-
-
-      {/* TABLE/LIST HEADER */}
-      <TableHeader />
-
-
-      {/* STUDENT LIST */}
-      {students &&
-        students.map((student) => {
-          return <StudentCard key={student.email} {...student} />;
-        })}
+            <strong>{student.fullName}</strong> - {student.program} -{" "}
+            {student.graduationYear} - {student.graduated ? "Graduated" : "Not Graduated"} -{" "}
+            {student.email} - {student.phone}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
