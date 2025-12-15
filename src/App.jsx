@@ -8,9 +8,10 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+
   const [fullName, setFullName] = useState('');
   const [image, setImage] = useState('');
-  const [tel, setTel] = useState('');
+  const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [program, setProgram] = useState('');
   const [graduationYear, setGraduationYear] = useState(0);
@@ -18,18 +19,41 @@ function App() {
 
   const handleFullNameInput = (event) => setFullName(event.target.value);
   const handleImageInput = (event) => setImage(event.target.value);
-  const handleTelInput = (event) => setTel(event.target.value);
+  const handlePhoneInput = (event) => setPhone(event.target.value);
   const handleEmailInput = (event) => setEmail(event.target.value);
   const handleProgramInput = (event) => setProgram(event.target.value);
   const handleGraduationYearInput = (event) => setGraduationYear(event.target.value);
   const handleGraduatedInput = (event) => setGraduated(event.target.value);
-  
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    const student = {
+      fullName,
+      email,
+      phone,
+      program,
+      image,
+      graduationYear,
+      graduated
+    };
+
+    setStudents([...students, student]);
+
+    setFullName('');
+    setImage('');
+    setPhone('');
+    setEmail('');
+    setProgram('');
+    setGraduationYear('');
+    setGraduated('');
+  };
+  console.log(students)
   return (
     <div className="App pt-20">
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <span>Add a Student</span>
         <div>
           <label>
@@ -60,8 +84,8 @@ function App() {
               name="phone" 
               type="tel" 
               placeholder="Phone" 
-              value={tel}
-              onChange={handleTelInput}
+              value={phone}
+              onChange={handlePhoneInput}
               />
           </label>
 
