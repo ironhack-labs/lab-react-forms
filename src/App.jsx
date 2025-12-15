@@ -10,14 +10,14 @@ import AddStudent from "./components/AddStudent";
 function App() {
   const [students, setStudents] = useState(studentsData);
 
-  const handleAddStudent = (newStudent) => {
-    setStudents([newStudent, ...students]);
-  };
+  // const handleAddStudent = (newStudent) => {
+  //   setStudents([newStudent, ...students]);
+  // };
 
   return (
     <div className="App pt-20">
       <Navbar />
-      <AddStudent handleAddStudent={handleAddStudent} />
+      <AddStudent students={students} setStudents={setStudents} />
       {/* TABLE/LIST HEADER */}
       <TableHeader />
       {/* STUDENT LIST */}

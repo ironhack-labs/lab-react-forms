@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function AddStudent({ handleAddStudent }) {
+function AddStudent({ students, setStudents }) {
   const [fullName, setFullName] = useState("");
   const [profileImage, setProfileImage] = useState("");
   const [phone, setPhone] = useState("");
@@ -11,24 +11,52 @@ function AddStudent({ handleAddStudent }) {
 
   // example url : https://images.pexels.com/photos/188029/pexels-photo-188029.jpeg
 
-  function handleSubmitForm(e) {
-    e.preventDefault();
+  // function handleSubmitForm(e) {
+  //   e.preventDefault();
+  //   const newStudent = {
+  //     fullName: fullName,
+  //     email: email,
+  //     phone: phone,
+  //     program: program,
+  //     image: profileImage,
+  //     graduationYear: graduationYear,
+  //     graduated: isGraduate,
+  //   };
+  //   setFullName("");
+  //   setProfileImage("");
+  //   setPhone("");
+  //   setEmail("");
+  //   setProgram("");
+  //   setGraduationYear(2023);
+  //   setIsGraduate(false);
+  //   // console.log("student added:", newStudent);
+  //   handleAddStudent(newStudent);
+  // }
+
+  function handleAddStudent(event) {
+    event.preventDefault();
     const newStudent = {
-      fullName: fullName,
-      email: email,
-      phone: phone,
-      program: program,
-      image: profileImage,
-      graduationYear: graduationYear,
-      graduated: isGraduate,
+      fullName,
+      profileImage,
+      phone,
+      email,
+      isGraduate,
+      graduationYear,
+      program,
     };
-    // console.log("student added:", newStudent);
-    handleAddStudent(newStudent);
+    setStudents([newStudent, ...students]);
+
+    setFullName("");
+    setProfileImage("");
+    setEmail("");
+    setPhone("");
+    setIsGraduate(false);
+    setGraduationYear(2023);
   }
   return (
     <>
       {/* FORM */}
-      <form onSubmit={handleSubmitForm}>
+      <form onSubmit={handleAddStudent}>
         <span>Add a Student</span>
         <div>
           <label>
