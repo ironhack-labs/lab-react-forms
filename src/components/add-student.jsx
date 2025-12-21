@@ -16,13 +16,11 @@ function AddStudent({ handleAddStudent }){
 
   //Handles
   const handleChange = (event) => {
-    const value = event.target.value;
-    setState(
-      {
-        ...state,
-        [event.target.name]: value
-      }
-    );
+    const { name, value, type, checked } = event.target;
+    setState({
+      ...state,
+      [name]: type === "checkbox" ? checked : value
+    });
   }
 
   const handleSubmit = (event) => {
@@ -40,12 +38,7 @@ function AddStudent({ handleAddStudent }){
     handleAddStudent(newStudent);
 
     //Reset the form
-    setFullName("");
-    setImage("");
-    setPhone("");
-    setEmail("");
-    setProgram("");
-    setGraduationYear(2023);
+    setState(initialState);
     
   }
   
