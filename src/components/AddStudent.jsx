@@ -11,6 +11,24 @@ function AddStudent({ handleAddStudent }) {
     const [graduationYear, setGraduationYear] = useState(2023);
     const [graduated, setGraduated] = useState(false);
 
+    const handleOnChange = (event) => {
+        if (event.target.name === "fullName") {
+            setFullName(event.target.value)
+        } else if (event.target.name === "image") {
+            setImage(event.target.value)
+        } else if (event.target.name === "phone") {
+            setPhone(event.target.value)
+        } else if (event.target.name === "email") {
+            setEmail(event.target.value)
+        } else if (event.target.name === "program") {
+            setProgram(event.target.value)
+        } else if (event.target.name === "graduationYear") {
+            setGraduationYear(event.target.value)
+        } else if (event.target.name === "graduated") {
+            setGraduated(event.target.value)
+        }
+    }
+
     const handleSubmitForm = (event) => {
         event.preventDefault()
         const newStudent = {
@@ -38,29 +56,29 @@ function AddStudent({ handleAddStudent }) {
             <div>
             <label>
                 Full Name
-                <input name="fullName" type="text" placeholder="Full Name" value={fullName} onChange={(event) => setFullName(event.target.value)}/>
+                <input name="fullName" type="text" placeholder="Full Name" value={fullName} onChange={handleOnChange}/>
             </label>
 
             <label>
                 Profile Image
-                <input name="image" type="url" placeholder="Profile Image" value={image} onChange={(event) => setImage(event.target.value)}/>
+                <input name="image" type="url" placeholder="Profile Image" value={image} onChange={handleOnChange}/>
             </label>
 
             <label>
                 Phone
-                <input name="phone" type="tel" placeholder="Phone" value={phone} onChange={(event) => setPhone(event.target.value)}/>
+                <input name="phone" type="tel" placeholder="Phone" value={phone} onChange={handleOnChange}/>
             </label>
 
             <label>
                 Email
-                <input name="email" type="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}/>
+                <input name="email" type="email" placeholder="Email" value={email} onChange={handleOnChange}/>
             </label>
             </div>
 
             <div>
             <label>
                 Program
-                <select name="program" value={program} onChange={(event) => setProgram(event.target.value)}>
+                <select name="program" value={program} onChange={handleOnChange}>
                 <option value="">-- None --</option>
                 <option value="Web Dev">Web Dev</option>
                 <option value="UXUI">UXUI</option>
@@ -79,13 +97,13 @@ function AddStudent({ handleAddStudent }) {
                 min={2023}
                 max={2030}
                 value={graduationYear}
-                onChange={(event) => setGraduationYear(event.target.value)}
+                onChange={handleOnChange}
                 />
             </label>
 
             <label>
                 Graduated
-                <input name="graduated" type="checkbox" checked={graduated} onChange={(event) => setGraduated(event.target.value)}/>
+                <input name="graduated" type="checkbox" checked={graduated} onChange={handleOnChange}/>
             </label>
 
             <button type="submit">Add Student</button>
