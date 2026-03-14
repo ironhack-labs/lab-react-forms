@@ -1,10 +1,13 @@
 import "./App.css";
+
 import { useState } from "react";
+
 import Navbar from "./components/Navbar";
 import TableHeader from "./components/TableHeader";
 import StudentCard from "./components/StudentCard";
 
 import studentsData from "./assets/students.json";
+import defaultImg from "./assets/profile-icon.png"
 
 function App() {
   const [students, setStudents] = useState(studentsData);
@@ -32,6 +35,14 @@ function App() {
     const newListOfStudents = [newStudent, ...students]
 
     setStudents(newListOfStudents)
+
+    setFullName("")
+    setImage("")
+    setPhone("")
+    setEmail("")
+    setProgram("Web Dev")
+    setGraduationYear(2023)
+    setGraduated(false)
 
   }
 
