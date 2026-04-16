@@ -8,7 +8,30 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [dataForm, setdataForm] = useState({
+    fullname: "",
+    email: "",
+    phone: "",
+    image: "",
+    program: "Web Dev",
+    graduationYear: 2023,
+    graduated: false,
+  })
 
+  console.log("Estado actual del formulario:", dataForm);
+const handleSubmit = (e) => {
+  e.preventDefault();
+  setStudents([...setStudents, dataForm])
+}
+
+const handleChange = (e) => {
+  const { name , value , type, checked } = e.target
+
+  setdataForm({
+    ...dataForm,
+    [name]: type === "checkbox" ? checked : value
+  })
+}
 
   return (
     <div className="App pt-20">
@@ -20,29 +43,29 @@ function App() {
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input name="fullname" type="text" placeholder="Full Name" value={dataForm.fullname} onChange={handleChange}/>
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input name="image" type="url" placeholder="Profile Image" value={dataForm.image} onChange={handleChange}/>
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input name="phone" type="tel" placeholder="Phone" value={dataForm.phone} onChange={handleChange}/>
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input name="email" type="email" placeholder="Email" value={dataForm.email} onChange={handleChange} />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select name="program" value={dataForm.program} onChange={handleChange}>
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -52,7 +75,7 @@ function App() {
 
           <label>
             Graduation Year
-            <input
+            <input value={dataForm.graduationYear} onChange={handleChange}
               name="graduationYear"
               type="number"
               placeholder="Graduation Year"
@@ -65,7 +88,7 @@ function App() {
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input name="graduated" type="checkbox"  value={dataForm.graduated} onChange={handleChange}/>
           </label>
 
           <button type="submit">Add Student</button>
