@@ -8,7 +8,70 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+ 
+  // create states for all input values 
+  const [fullName, setFullName] = useState("");
+  const [image, setImage] = useState("");
+  const [phone, setPhone] = useState(0);
+  const [email, setEmail] = useState("");
+  const [program, setProgram] = useState("All");
+  const [graduationYear, setGraduationYear] = useState(2023);
+  const [graduated, setGraduated] = useState(false);
+  
+ // adding all handling function to handle the change in the event 
+  const handleFullNameChange = (event)=> {
+    setFullName(event.target.value)
+  }
+   const handleImageChange = (event)=> {
+    setImage(event.target.value)
+  }
+   const handlePhoneChange = (event)=> {
+    setPhone(event.target.value)
+  }
+   const handleEmailChange = (event)=> {
+    setEmail(event.target.value)
+  }
+   const handleProgramChange = (event)=> {
+    setProgram(event.target.value)
+  }
+   const handleGraduationYearChange = (event)=> {
+    setGraduationYear(event.target.value)
+  }
+   const handleGraduatedChange = (event)=> {
+    setGraduated(event.target.checked)
+  }
 
+
+  const handleFormSubmit = (event)=> {
+  event.preventDefault();
+
+   // create object with all info values that added in the state & input
+  const newStudent ={
+   fullName : fullName,
+   image:image,
+   phone:phone,
+   email:email,
+   program:program,
+   graduationYear:graduationYear,
+   graduated:graduated
+
+  }
+
+  // addding the new student in the cloned array from the original student array 
+  const clone = structuredClone(students)
+  clone.push(newStudent)
+  setStudents(clone)
+  
+  // clean the input after submit 
+  setFullName("")
+   setImage("")
+   setPhone(0)
+   setEmail("")
+   setProgram("All")
+   setGraduationYear(2003)
+   setGraduated(false)
+  
+  }
 
   return (
     <div className="App pt-20">
@@ -20,29 +83,29 @@ function App() {
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input onChange={handleFullNameChange} value = {fullName} name="fullName" type="text" placeholder="Full Name" />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input onChange={handleImageChange} value = {image} name="image" type="url" placeholder="Profile Image" />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input onChange={handlePhoneChange} value = {phone} name="phone" type="tel" placeholder="Phone" />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input onChange={handleEmailChange} value = {email} name="email" type="email" placeholder="Email" />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select onChange={handleProgramChange} value = {program} name="program">
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -52,7 +115,9 @@ function App() {
 
           <label>
             Graduation Year
-            <input
+            <input 
+            onChange={handleGraduationYearChange}
+              value = {graduationYear}
               name="graduationYear"
               type="number"
               placeholder="Graduation Year"
@@ -65,10 +130,10 @@ function App() {
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input onChange={handleGraduatedChange} checked = {graduated} name="graduated" type="checkbox" />
           </label>
 
-          <button type="submit">Add Student</button>
+          <button onClick={handleFormSubmit} type="submit">Add Student</button>
         </div>
 
       </form>
