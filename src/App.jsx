@@ -8,34 +8,105 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [fullName, setfullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
+
+  const [Program, setProgram] = useState("web");
+  const [graduationYear, setgraduationYear] = useState(2023);
+  const [graduated, setgraduated] = useState(false);
+
+  const handlefullNameInput = (e) => setfullName(e.target.value);
+  const handleImageInput = (e) => setImage(e.target.value);
+  const handlephoneNumberInput = (e) => setPhoneNumber(e.target.value);
+
+  const handleemailInput = (e) => setEmail(e.target.value);
+
+  const handleProgramInput = (e) => setProgram(e.target.value);
+
+  const handlegraduationYearInput = (e) => setGraduationYear(e.target.value);
+
+  const handlegraduatedInput = (e) => setGraduated(e.target.checked);
+
+  //* fonction submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newStudent = {
+      fullName,
+      phoneNumber,
+      email,
+      Program,
+      graduationYear,
+      graduated,
+    };
+
+// reset form 
+    setStudents([...students, newStudent]);
+    setFullName("");
+    setPhoneNumber("");
+    setEmail("");
+    setImage("");
+    setProgram("Web Dev");
+    setGraduationYear(2023);
+    setGraduated(false);
+  };
 
 
   return (
     <div className="App pt-20">
       <Navbar />
 
-      {/* FORM */}
-      <form>
+      {/* FORM */} 
+
+
+      <form onSubmit={handleSubmit}>
+
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input
+              name="fullName"
+              type="text"
+              placeholder="Full Name"
+              value={fullName}
+              onChange={handlefullNameInput}
+            />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input
+              name="image"
+              type="url"
+              placeholder="Profile Image"
+              value={image}
+              onChange={handleImageInput}
+            />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input
+              name="phone"
+              type="tel"
+              placeholder="Phone"
+              value={phoneNumber}
+              onChange={handlephoneNumberInput}
+            />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={handleemailInput}
+            />
           </label>
         </div>
 
@@ -70,14 +141,12 @@ function App() {
 
           <button type="submit">Add Student</button>
         </div>
-
+ 
       </form>
       {/* FORM END */}
 
-
       {/* TABLE/LIST HEADER */}
       <TableHeader />
-
 
       {/* STUDENT LIST */}
       {students &&
