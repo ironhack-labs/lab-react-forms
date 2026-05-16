@@ -1,5 +1,6 @@
 import logo from "./../assets/logo-ironhack-blue.png";
 import profile from "./../assets/profile-icon.png";
+//import { Link } from "react-router";
 
 function Navbar() {
   return (
