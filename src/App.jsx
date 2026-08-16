@@ -40,7 +40,7 @@ function App(props) {
     
 
 
-    // ✅ Add the new student to the existing students array
+    // Add the new student to the existing students array
     setStudents([newStudent, ...students]);
       
    
