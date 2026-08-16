@@ -12,9 +12,6 @@ function App() {
 function handleAddStudent(newStudent){
   setStudents([...students, newStudent]);
 }
-
-
-
   return (
     <div className="App pt-20">
       <Navbar />
