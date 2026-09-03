@@ -25,13 +25,37 @@ function App() {
   const handleGraduationYearChange = (e) => setGraduationYear(Number(e.target.value));
   const handleGraduatedChange = (e) => setGraduated(e.target.checked);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newStudent = {
+      fullName,
+      email,
+      phone,
+      program,
+      image,
+      graduationYear,
+      graduated,
+    };
+
+    setStudents([...students, newStudent]);
+
+    setFullName("");
+    setImage("");
+    setPhone("");
+    setEmail("");
+    setProgram("");
+    setGraduationYear(2023);
+    setGraduated(false);
+  };
+
 
   return (
     <div className="App pt-20">
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <span>Add a Student</span>
         <div>
           <label>
