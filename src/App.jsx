@@ -1,3 +1,4 @@
+
 import "./App.css";
 import { useState } from "react";
 import Navbar from "./components/Navbar";
@@ -7,42 +8,111 @@ import StudentCard from "./components/StudentCard";
 import studentsData from "./assets/students.json";
 
 function App() {
+  // STUDENTS STATE
   const [students, setStudents] = useState(studentsData);
 
+  // ITERATION 1 - CREATE STATE VARIABLES
+
+  const [fullName, setFullName] = useState("");
+  const [image, setImage] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [program, setProgram] = useState("");
+  const [graduationYear, setGraduationYear] = useState(2023);
+  const [graduated, setGraduated] = useState(false);
+
+  // ITERATION 3 - HANDLE FORM SUBMISSION
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    // CREATE NEW STUDENT OBJECT
+    const newStudent = {
+      fullName: fullName,
+      image: image,
+      phone: phone,
+      email: email,
+      program: program,
+      graduationYear: graduationYear,
+      graduated: graduated,
+    };
+
+    // ADD NEW STUDENT TO ARRAY
+    setStudents([...students, newStudent]);
+
+    // CLEAR FORM INPUTS
+    setFullName("");
+    setImage("");
+    setPhone("");
+    setEmail("");
+    setProgram("");
+    setGraduationYear(2023);
+    setGraduated(false);
+  };
 
   return (
     <div className="App pt-20">
       <Navbar />
 
-      {/* FORM */}
-      <form>
+      {/* ITERATION 2 - LINK INPUTS TO STATE */}
+
+      <form onSubmit={handleFormSubmit}>
         <span>Add a Student</span>
+
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input
+              name="fullName"
+              type="text"
+              placeholder="Full Name"
+              value={fullName}
+              onChange={(event) => setFullName(event.target.value)}
+            />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input
+              name="image"
+              type="url"
+              placeholder="Profile Image"
+              value={image}
+              onChange={(event) => setImage(event.target.value)}
+            />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input
+              name="phone"
+              type="tel"
+              placeholder="Phone"
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
+            />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select
+              name="program"
+              value={program}
+              onChange={(event) => setProgram(event.target.value)}
+            >
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -60,24 +130,29 @@ function App() {
               maxLength={4}
               min={2023}
               max={2030}
+              value={graduationYear}
+              onChange={(event) =>
+                setGraduationYear(Number(event.target.value))
+              }
             />
           </label>
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input
+              name="graduated"
+              type="checkbox"
+              checked={graduated}
+              onChange={(event) => setGraduated(event.target.checked)}
+            />
           </label>
 
           <button type="submit">Add Student</button>
         </div>
-
       </form>
-      {/* FORM END */}
-
 
       {/* TABLE/LIST HEADER */}
       <TableHeader />
-
 
       {/* STUDENT LIST */}
       {students &&
