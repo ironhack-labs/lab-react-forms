@@ -8,6 +8,48 @@ import studentsData from "./assets/students.json";
 
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [fullName, setFullName] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [program, setProgram] = useState("")
+  const [graduationYear, setGraduationYear] = useState(0);
+  const [graduated, setGraduated] = useState(false);
+  
+  
+
+
+  const handleFullName = (e) => setFullName(e.target.value)
+  const handleImageUrl = (e) => setImageUrl(e.target.value)
+  const handlePhoneNumber = (e) => setPhoneNumber(e.target.value)
+  const handleEmail = (e) => setEmail(e.target.value)
+  const handleProgram = (e) => setProgram(e.target.value)
+  const handleGraduationYear = (e) => setGraduationYear(e.target.value)
+  const handleGraduated = (e) => setGraduated(e.target.checked)
+  
+  
+
+  const handleSubmit = (e) => {
+
+    e.preventDefault();
+
+    const newStudent ={
+      
+      fullName,
+      email, 
+      phone: phoneNumber,
+      program, 
+      image: imageUrl,
+      graduationYear: Number(graduationYear),
+      graduated,
+    
+    }
+
+    setStudents([...students, newStudent])
+
+  }    
+
+
 
 
   return (
@@ -20,29 +62,29 @@ function App() {
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input name="fullName" type="text" placeholder="Full Name" onChange={handleFullName} value={fullName}/>
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input name="image" type="url" placeholder="Profile Image" onChange={handleImageUrl} value={imageUrl} />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input name="phone" type="tel" placeholder="Phone" onChange={handlePhoneNumber} value={phoneNumber} />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input name="email" type="email" placeholder="Email" onChange={handleEmail} value={email} />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select name="program" onChange={handleProgram} value={program} >
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -60,15 +102,17 @@ function App() {
               maxLength={4}
               min={2023}
               max={2030}
+              onChange={handleGraduationYear}
+              value={graduationYear}
             />
           </label>
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input name="graduated" type="checkbox" onChange={handleGraduated} checked={graduated}/>
           </label>
 
-          <button type="submit">Add Student</button>
+          <button type="submit" onClick={handleSubmit}>Add Student</button>
         </div>
 
       </form>
@@ -80,8 +124,7 @@ function App() {
 
 
       {/* STUDENT LIST */}
-      {students &&
-        students.map((student) => {
+      { students.map((student) => {
           return <StudentCard key={student.email} {...student} />;
         })}
     </div>
